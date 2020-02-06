@@ -4,8 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/index.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/index.js",
+    "build:dll": "cross-env NODE_ENV=dll webpack --config webpack/index.js",
+    "analysis": "cross-env NODE_ENV=analysis webpack --config webpack/index.js"
   },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tianlikai/boilerplate-typeScript-reduxFlow.git"
@@ -16,5 +25,49 @@
   "bugs": {
     "url": "https://github.com/Tianlikai/boilerplate-typeScript-reduxFlow/issues"
   },
-  "homepage": "https://github.com/Tianlikai/boilerplate-typeScript-reduxFlow#readme"
+  "homepage": "https://github.com/Tianlikai/boilerplate-typeScript-reduxFlow#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
+    "classnames": "^2.2.6",
+    "history": "^4.10.1",
+    "lib-flexible": "^0.3.2",
+    "lodash": "^4.17.15",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-redux": "^7.1.7",
+    "autoprefixer": "^9.7.4",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.13.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-scss": "^2.0.0",
+    "px2rem-loader": "^0.1.9",
+    "raw-loader": "^4.0.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "typescript": "^3.7.5",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2",
+    "webpack-merge": "^4.2.2"
+  }
 }
