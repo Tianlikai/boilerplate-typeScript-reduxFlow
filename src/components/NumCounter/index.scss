@@ -1,0 +1,47 @@
+$prefix: "NumCounter";
+$digitHeight: 33px;
+$speed: 0.4s;
+
+.#{$prefix} {
+  display: inline-block;
+  height: $digitHeight;
+  color: #42e4ff;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: $digitHeight;
+  white-space: normal;
+
+  &-digit {
+    display: inline-block;
+    width: 14px;
+    height: 100%;
+    overflow: hidden;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+    border-radius: 8px;
+
+    &-item {
+      height: $digitHeight;
+
+      > span {
+        vertical-align: top;
+      }
+    }
+    @for $i from 1 through 9 {
+
+      &.d#{$i} > div {
+        transform: translateY(-$digitHeight * $i);
+        transition: $speed cubic-bezier(0.12, 0.78, 0.52, 1.2);
+      }
+    }
+  }
+
+  &-separator {
+    width: 9px;
+    font-weight: normal;
+    vertical-align: middle;
+    opacity: 1;
+  }
+}
