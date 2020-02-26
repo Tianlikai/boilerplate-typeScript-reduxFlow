@@ -1,22 +1,23 @@
 const merge = require("webpack-merge");
 
-const comConfig = require("./webpack.base");
+const baseConfig = require("./webpack.base");
 const devConfig = require("./webpack.dev");
-// const prodConfig = require("./webpack.prod.config");
+const prodConfig = require("./webpack.prod");
+const analyzerConfig = require("./webpack.analyzer");
+const dllConfig = require("./webpack.dll");
 
 module.exports = () => {
   switch (process.env.NODE_ENV) {
     case "development":
-      return merge(comConfig, devConfig);
+      return merge(baseConfig, devConfig);
     case "production":
-      //   return merge(comConfig, prodConfig);
-      break;
+      return merge(baseConfig, prodConfig);
+    case "analyzer":
+      return merge(baseConfig, prodConfig, analyzerConfig);
     case "dll":
-      break;
-    case "analysis":
-      break;
+      return dllConfig;
     default:
-      throw new Error("not exits scripts");
+      console.error("不支持该命令!");
       break;
   }
 };

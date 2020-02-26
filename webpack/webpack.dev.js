@@ -1,22 +1,14 @@
 const path = require("path");
 const webpack = require("webpack");
-
-const config = require("./config");
-const publicPath = `${config.PROTOCOL}://${config.HOST}:${config.PORT}/`;
+const environment = require("./env");
 
 module.exports = {
+  devtool: "inline-cheap-module-source-map",
   mode: "development",
-  devtool: "cheap-module-eval-source-map",
-  cache: true,
-  output: {
-    filename: "[name].js",
-    chunkFilename: "[name].chunk.js",
-    publicPath
-  },
   module: {
     rules: [
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.css$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -24,25 +16,35 @@ module.exports = {
             loader: "px2rem-loader",
             options: {
               remUni: 75,
-              remPrecision: 8
-            }
+              remPrecision: 8,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "px2rem-loader",
+            options: {
+              remUni: 75,
+              remPrecision: 8,
+            },
           },
           "postcss-loader",
-          "sass-loader"
-        ]
-      }
-    ]
+          "sass-loader",
+        ],
+      },
+    ],
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "../src"),
-    host: config.HOST,
-    port: config.PORT,
-    // open: true,
+    contentBase: path.join(__dirname, "../dist"),
+    host: environment.HOST,
+    port: environment.PORT,
+    open: true,
     hot: true,
-    https: config.PROTOCOL === "https",
-    overlay: true,
-    compress: true,
-    stats: { color: true },
-    historyApiFallback: true
-  }
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };

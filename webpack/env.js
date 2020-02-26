@@ -1,12 +1,10 @@
-const env = {
+module.exports = {
   PROJECT: "",
   PROTOCOL: "http",
-  HOST: "localhost",
-  PORT: 9000,
+  HOST: require("ip").address(),
+  PORT: 8000,
   BASENAME: "",
   SERVICE_IP: "",
   ROUTER: "",
-  TARGET: ""
+  TARGET: "",
 };
-
-module.exports = env;
