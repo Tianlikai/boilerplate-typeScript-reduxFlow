@@ -1,0 +1,89 @@
+$prefixAppHeaderLayout: "AppHeaderLayout";
+$prefixAppHeader: "AppHeader";
+$appHeaderHeight: 60px;
+
+.#{$prefixAppHeaderLayout} {
+  width: 100%;
+  height: 100%;
+}
+
+.#{$prefixAppHeader} {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: $appHeaderHeight;
+  padding: 0 24px;
+  color: rgba(255, 255, 255, 1);
+  line-height: $appHeaderHeight;
+  background-color: #001529;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+
+  &-inlineLeft {
+    display: flex;
+  }
+
+  &-inlineRight {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.NavLogo {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+
+  &-img {
+    width: 26px;
+    height: 26px;
+  }
+
+  &-separate {
+    width: 0.5px;
+    height: 25px;
+    margin: 0 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  &-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+  }
+}
+
+.NavMenu {
+  display: flex;
+
+  .NavLink {
+    z-index: 10;
+    padding: 0 14px;
+    line-height: $appHeaderHeight;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 28px;
+    }
+
+    &-anchor {
+      color: rgba(255, 255, 255, 0.54);
+      font-size: 14px;
+    }
+
+    &.is-active .NavLink-anchor,
+    &:hover .NavLink-anchor {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    &.is-active {
+      color: transparent;
+      border-bottom-color: #57a6af;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+}
