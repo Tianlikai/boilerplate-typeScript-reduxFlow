@@ -8,7 +8,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import logoSrc from "../../../assets/images/logo.svg";
 import { updateAuthenticated } from "../../Auth/action";
 import { NavRoutesConsumer } from "./NavRouterContext";
-// import AppHeadOverlay from "./AppHeadOverlay";
+import AppHeadOverlay from "./AppHeadOverlay";
 
 const PREFIX = "AppHeader";
 
@@ -42,7 +42,7 @@ class AppHeader extends React.PureComponent<Props> {
                   <img src={logoSrc} alt="logo" />
                 </div>
                 <div className="NavLogo-separate" />
-                <div className="NavLogo-text">mengmeng...</div>
+                <div className="NavLogo-text">eleven</div>
               </div>
               <div className="NavMenu">
                 {_.map(navRoutes, nav => (
@@ -58,9 +58,9 @@ class AppHeader extends React.PureComponent<Props> {
                 ))}
               </div>
             </div>
-            {/* <div className={`${PREFIX}-inlineRight`}>
+            <div className={`${PREFIX}-inlineRight`}>
               <AppHeadOverlay logout={this.handleLogout} />
-            </div> */}
+            </div>
           </div>
         )}
       </NavRoutesConsumer>

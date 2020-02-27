@@ -1,6 +1,6 @@
 $prefixAppHeaderLayout: "AppHeaderLayout";
 $prefixAppHeader: "AppHeader";
-$appHeaderHeight: 60px;
+$appHeaderHeight: 80px;
 
 .#{$prefixAppHeaderLayout} {
   width: 100%;
@@ -34,12 +34,12 @@ $appHeaderHeight: 60px;
   margin-right: 40px;
 
   &-img {
-    width: 26px;
-    height: 26px;
+    width: 40px;
+    height: 40px;
   }
 
   &-separate {
-    width: 0.5px;
+    width: 1.5px;
     height: 25px;
     margin: 0 16px;
     background-color: rgba(255, 255, 255, 0.5);
@@ -47,7 +47,7 @@ $appHeaderHeight: 60px;
 
   &-text {
     color: rgba(255, 255, 255, 1);
-    font-size: 14px;
+    font-size: 20px;
   }
 }
 
@@ -69,7 +69,7 @@ $appHeaderHeight: 60px;
 
     &-anchor {
       color: rgba(255, 255, 255, 0.54);
-      font-size: 14px;
+      font-size: 16px;
     }
 
     &.is-active .NavLink-anchor,

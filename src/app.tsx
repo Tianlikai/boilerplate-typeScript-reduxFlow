@@ -15,7 +15,6 @@ import { Dashboard } from "./modules/Dashboard";
 import { List } from "./modules/List";
 import { AppHeaderLayout } from "./modules/Common/Header";
 import { RouteWithLayout } from "./components/RouteWithLayout";
-import "./index.scss";
 
 const navRoutes = [
   { label: "dashboard", url: "/dashboard" },
