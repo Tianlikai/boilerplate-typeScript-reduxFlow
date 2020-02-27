@@ -1,17 +1,19 @@
-const glob = require("glob");
+// const glob = require("glob");
 const path = require("path");
 const cssnano = require("cssnano");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
+/** TODO: 生产环境打包会丢失html tag & css selector样式 */
+// const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const { getDllPlugins } = require("./util");
+const { px2remLoader } = require("./loader");
 
-const PATHS = {
-  src: path.join(__dirname, "../src"),
-};
+// const PATHS = {
+//   src: path.join(__dirname, "../src"),
+// };
 
 module.exports = {
   output: {
@@ -24,18 +26,13 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
+        exclude: path.join(__dirname, "../src"),
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           "css-loader",
-          {
-            loader: "px2rem-loader",
-            options: {
-              remUni: 75,
-              remPrecision: 8,
-            },
-          },
+          px2remLoader,
         ],
       },
       {
@@ -45,13 +42,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           "css-loader",
-          {
-            loader: "px2rem-loader",
-            options: {
-              remUni: 75,
-              remPrecision: 8,
-            },
-          },
+          px2remLoader,
           "postcss-loader",
           "sass-loader",
         ],
@@ -97,8 +88,11 @@ module.exports = {
     minimize: true,
     minimizer: [
       new OptimizeCSSAssetsPlugin({
-        assetNameRegExp: /\.css&/g,
         cssProcessor: cssnano,
+        cssProcessorPluginOptions: {
+          preset: ["default", { discardComments: { removeAll: true } }],
+        },
+        canPrint: true,
       }),
       new TerserPlugin({ cache: true, parallel: true }),
     ],
@@ -130,9 +124,9 @@ module.exports = {
       filename: "[name].[chunkhash:8].css",
       chunkFilename: "[id].[chunkhash:8].css",
     }),
-    new PurgecssPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-    }),
+    // new PurgecssPlugin({
+    //   paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+    // }),
     ...getDllPlugins(),
   ],
 };

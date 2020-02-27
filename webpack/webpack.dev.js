@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const environment = require("./env");
+const { px2remLoader } = require("./loader");
 
 module.exports = {
   devtool: "inline-cheap-module-source-map",
@@ -9,30 +10,15 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "px2rem-loader",
-            options: {
-              remUni: 75,
-              remPrecision: 8,
-            },
-          },
-        ],
+        exclude: path.join(__dirname, "../src"),
+        use: ["style-loader", "css-loader", px2remLoader],
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           "style-loader",
           "css-loader",
-          {
-            loader: "px2rem-loader",
-            options: {
-              remUni: 75,
-              remPrecision: 8,
-            },
-          },
+          px2remLoader,
           "postcss-loader",
           "sass-loader",
         ],
