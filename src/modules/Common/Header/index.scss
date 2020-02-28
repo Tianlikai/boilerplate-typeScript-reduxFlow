@@ -12,10 +12,10 @@ $appHeaderHeight: 80px;
   display: flex;
   justify-content: space-between;
   height: $appHeaderHeight;
-  padding: 0 24px;
+  padding: 0 40px;
   color: rgba(255, 255, 255, 1);
   line-height: $appHeaderHeight;
-  background-color: #001529;
+  background-color: #fff;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 
   &-inlineLeft {
@@ -37,18 +37,6 @@ $appHeaderHeight: 80px;
     width: 40px;
     height: 40px;
   }
-
-  &-separate {
-    width: 1.5px;
-    height: 25px;
-    margin: 0 16px;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-
-  &-text {
-    color: rgba(255, 255, 255, 1);
-    font-size: 20px;
-  }
 }
 
 .NavMenu {
@@ -68,13 +56,13 @@ $appHeaderHeight: 80px;
     }
 
     &-anchor {
-      color: rgba(255, 255, 255, 0.54);
+      color: #71777c;
       font-size: 16px;
     }
 
     &.is-active .NavLink-anchor,
     &:hover .NavLink-anchor {
-      color: rgba(255, 255, 255, 1);
+      color: #57a6af;
     }
 
     &.is-active {
@@ -86,4 +74,10 @@ $appHeaderHeight: 80px;
       }
     }
   }
+}
+
+.AppHeadOverlay-icon {
+  color: #71777c;
+  font-size: 20px;
+  cursor: pointer;
 }

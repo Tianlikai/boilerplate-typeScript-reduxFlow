@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Menu } from "antd";
+import { Dropdown, Icon, Menu } from "antd";
 
 interface Props {
   logout: () => void;
@@ -12,8 +12,8 @@ const AppHeadOverlay: React.FC<Props> = ({ logout }) => {
     </Menu>
   );
   return (
-    <Dropdown overlay={menu} placement="bottomCenter">
-      <div>header</div>
+    <Dropdown overlay={menu} placement="bottomLeft">
+      <Icon className="AppHeadOverlay-icon" type="user" />
     </Dropdown>
   );
 };

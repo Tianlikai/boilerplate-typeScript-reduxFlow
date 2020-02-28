@@ -41,8 +41,6 @@ class AppHeader extends React.PureComponent<Props> {
                 <div className="NavLogo-img">
                   <img src={logoSrc} alt="logo" />
                 </div>
-                <div className="NavLogo-separate" />
-                <div className="NavLogo-text">eleven</div>
               </div>
               <div className="NavMenu">
                 {_.map(navRoutes, nav => (

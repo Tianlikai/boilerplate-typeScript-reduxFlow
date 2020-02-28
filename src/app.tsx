@@ -17,7 +17,7 @@ import { AppHeaderLayout } from "./modules/Common/Header";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 
 const navRoutes = [
-  { label: "dashboard", url: "/dashboard" },
+  { label: "仪表盘", url: "/dashboard" },
   { label: "列表页", url: "/list" },
 ];
 
