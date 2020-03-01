@@ -1,0 +1,75 @@
+.DashboardSideMenu {
+
+  &-title {
+    height: 30px;
+    margin: 15px;
+    color: #333;
+    font-weight: 500;
+  }
+}
+
+.DashboardSideMenuItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin: 4px 15px;
+  padding: 0 10px;
+  color: #666;
+  font-size: 14px;
+  letter-spacing: 0.04px;
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &-sort {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    color: #220968;
+    line-height: 24px;
+    text-align: center;
+    background-color: #f1f1fa;
+    border: 1px solid #f1f1fa;
+    border-radius: 50%;
+
+    &.active {
+      color: #f1f1fa;
+      background-color: #222f73;
+    }
+  }
+
+  &-name {
+    color: #333;
+    font-weight: 700;
+  }
+
+  &-delete {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    display: none;
+  }
+
+  &.custom {
+    background: #f2f2f2;
+    border-style: dashed;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  &-add {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 6px 0 hsla(0, 0%, 40%, 0.5);
+
+    .DashboardSideMenuItem-delete {
+      display: inline-block;
+    }
+  }
+}
