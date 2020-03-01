@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const environment = require("./env");
 const { px2remLoader } = require("./loader");
+const proxy = require("./proxy");
 
 module.exports = {
   devtool: "inline-cheap-module-source-map",
@@ -31,6 +32,7 @@ module.exports = {
     port: environment.PORT,
     open: true,
     hot: true,
+    proxy: proxy,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 };
