@@ -1,4 +1,5 @@
 import "lib-flexible";
+import dayJs from "dayjs";
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider } from "react-redux";
@@ -10,11 +11,14 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 import { History } from "history";
+import "dayjs/locale/zh-cn";
 import { NavRoutesProvider } from "./modules/Common/Header/NavRouterContext";
 import { Dashboard } from "./modules/Dashboard";
 import { List } from "./modules/List";
 import { AppHeaderLayout } from "./modules/Common/Header";
 import { RouteWithLayout } from "./components/RouteWithLayout";
+
+dayJs.locale("zh-cn");
 
 const navRoutes = [
   { label: "仪表盘", url: "/dashboard" },
