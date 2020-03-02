@@ -1,4 +1,5 @@
 export interface Response {
-  rtn: number;
-  message: string;
+  errorCode: number;
+  errorMsg: string | null;
+  success: boolean;
 }

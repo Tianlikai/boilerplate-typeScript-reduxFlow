@@ -1,13 +1,25 @@
 import React from "react";
 import { Icon } from "antd";
+import { Dispatch, bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import SideMenu from "../component/SideMenu";
 import Content from "../component/Content";
+import { getChartData } from "../action";
 
 import "./index.scss";
 
 const PREFIX = "Dashboard";
 
-export default class Dashboard extends React.PureComponent<{}> {
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators({ getChartData: getChartData.request }, dispatch);
+
+type Props = ReturnType<typeof mapDispatchToProps>;
+
+class UnConnectDashboard extends React.PureComponent<Props> {
+  componentDidMount() {
+    this.props.getChartData();
+  }
+
   render() {
     return (
       <div className={PREFIX}>
@@ -23,3 +35,5 @@ export default class Dashboard extends React.PureComponent<{}> {
     );
   }
 }
+
+export default connect(null, mapDispatchToProps)(UnConnectDashboard);

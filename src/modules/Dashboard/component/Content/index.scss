@@ -1,0 +1,16 @@
+.DashboardContent {
+
+  &-list {
+    margin-top: 20px;
+  }
+
+  &-chart {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
