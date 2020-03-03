@@ -7,6 +7,7 @@ import { rootSelector } from "../selector";
 import { searchActions } from "../action";
 import ListTable from "../components/ListTable";
 import "./index.scss";
+// import DrawerForm from "./DrawerForm";
 
 const PREFIX = "List";
 
@@ -35,6 +36,7 @@ class List extends React.PureComponent<Props> {
           新建
         </Button>
         <ListTable loading={loading} />
+        {/* <DrawerForm /> */}
       </div>
     );
   }
