@@ -1,9 +1,12 @@
 import React from "react";
+import { Button } from "antd";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import { Dispatch, bindActionCreators } from "redux";
 import { rootSelector } from "../selector";
 import { searchActions } from "../action";
+import ListTable from "../components/ListTable";
+import "./index.scss";
 
 const PREFIX = "List";
 
@@ -26,7 +29,14 @@ class List extends React.PureComponent<Props> {
 
   render() {
     const { loading } = this.props;
-    return <div className={PREFIX}>{loading ? "loading..." : "list"}</div>;
+    return (
+      <div className={PREFIX}>
+        <Button className={`${PREFIX}-create`} type="primary" size="large">
+          新建
+        </Button>
+        <ListTable loading={loading} />
+      </div>
+    );
   }
 }
 
