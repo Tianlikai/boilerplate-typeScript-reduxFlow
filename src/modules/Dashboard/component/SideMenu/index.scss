@@ -2,9 +2,10 @@
 
   &-title {
     height: 30px;
-    margin: 15px;
+    margin: 8px 15px;
     color: #333;
     font-weight: 500;
+    line-height: 30px;
   }
 }
 
@@ -12,7 +13,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 45px;
   margin: 4px 15px;
   padding: 0 10px;
   color: #666;
@@ -25,10 +26,11 @@
 
   &-sort {
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
     color: #220968;
-    line-height: 24px;
+    line-height: 20px;
     text-align: center;
     background-color: #f1f1fa;
     border: 1px solid #f1f1fa;
@@ -42,12 +44,12 @@
 
   &-name {
     color: #333;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   &-delete {
     position: absolute;
-    top: 18px;
+    top: 16px;
     right: 15px;
     display: none;
   }

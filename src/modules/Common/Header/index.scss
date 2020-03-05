@@ -1,6 +1,6 @@
 $prefixAppHeaderLayout: "AppHeaderLayout";
 $prefixAppHeader: "AppHeader";
-$appHeaderHeight: 80px;
+$appHeaderHeight: 60px;
 
 .#{$prefixAppHeaderLayout} {
   width: 100%;
@@ -12,7 +12,7 @@ $appHeaderHeight: 80px;
   display: flex;
   justify-content: space-between;
   height: $appHeaderHeight;
-  padding: 0 40px;
+  padding: 0 24px;
   color: rgba(255, 255, 255, 1);
   line-height: $appHeaderHeight;
   background-color: #fff;
@@ -34,8 +34,8 @@ $appHeaderHeight: 80px;
   margin-right: 40px;
 
   &-img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -57,7 +57,7 @@ $appHeaderHeight: 80px;
 
     &-anchor {
       color: #71777c;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     &.is-active .NavLink-anchor,
@@ -78,6 +78,6 @@ $appHeaderHeight: 80px;
 
 .AppHeadOverlay-icon {
   color: #71777c;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
 }

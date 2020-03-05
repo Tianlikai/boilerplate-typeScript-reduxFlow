@@ -3,7 +3,7 @@ import { AnyAction } from "redux";
 import { updateAuthenticated } from "./action";
 
 const initState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
 };
 
 type AuthState = typeof initState;

@@ -1,0 +1,59 @@
+.Login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: lightskyblue;
+
+  &-bc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.LoginForm {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+  &-title {
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  &-formItem {
+    margin-bottom: 20px;
+  }
+
+  &-inp {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  &-error {
+    position: absolute;
+    color: red;
+    font-size: 12px;
+
+    &.is-hide {
+      display: none;
+    }
+  }
+
+  &-checkBox {
+    margin-bottom: 20px;
+  }
+
+  &-btn {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+  }
+}

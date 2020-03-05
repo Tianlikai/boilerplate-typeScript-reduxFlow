@@ -6,6 +6,7 @@ import { History } from "history";
 import { connectRouter } from "connected-react-router";
 import { Effect, fork } from "redux-saga/effects";
 import { configureStore } from "./store";
+import { flexible } from "./flexible";
 
 export class BootStrap {
   private history: History<any> | undefined;
@@ -82,6 +83,7 @@ export class BootStrap {
     customMiddleware: Middleware[],
     initialState: any,
   ) {
+    flexible();
     this.root = root;
     const store = this.initStore(customMiddleware, history, initialState);
     const HotRootApp = this.HotRootApp;
