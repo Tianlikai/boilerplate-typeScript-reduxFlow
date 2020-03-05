@@ -9,7 +9,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 // const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const { getDllPlugins } = require("./util");
-const { px2remLoader } = require("./loader");
 
 // const PATHS = {
 //   src: path.join(__dirname, "../src"),
@@ -32,7 +31,6 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           "css-loader",
-          px2remLoader,
         ],
       },
       {
@@ -42,7 +40,6 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           "css-loader",
-          px2remLoader,
           "postcss-loader",
           "sass-loader",
         ],

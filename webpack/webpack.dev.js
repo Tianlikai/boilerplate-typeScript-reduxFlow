@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const environment = require("./env");
-const { px2remLoader } = require("./loader");
 const proxy = require("./proxy");
 
 module.exports = {
@@ -12,17 +11,11 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: path.join(__dirname, "../src"),
-        use: ["style-loader", "css-loader", px2remLoader],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          px2remLoader,
-          "postcss-loader",
-          "sass-loader",
-        ],
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
     ],
   },
