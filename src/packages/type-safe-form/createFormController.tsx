@@ -3,12 +3,14 @@ import {
   getDefaultValidator,
   getDefaultValidation,
   composeValidations,
+  getDefaultValidationForm,
 } from "./valid";
 import {
   OuterFormProps,
   FormState,
   FormController,
   FieldValidatorFactories,
+  BaseForm,
 } from "./interface";
 
 export function createFormController<TSF, T>(
@@ -19,6 +21,12 @@ export function createFormController<TSF, T>(
   validators: FieldValidatorFactories<TSF, T>,
 ): FormController<TSF> {
   type FC = FormController<TSF>;
+
+  const children = new Set<BaseForm>();
+
+  const add: FC["add"] = child => children.add(child);
+
+  const remove: FC["remove"] = child => children.delete(child);
 
   const getFieldsForValidation = <K extends keyof TSF>(): K[] =>
     Object.keys(validators) as any;
@@ -103,6 +111,14 @@ export function createFormController<TSF, T>(
     return composeValidations(validations);
   };
 
+  const validate: FC["validate"] = async () => {
+    const validations = await Promise.all([
+      validateAllFields(),
+      ...[...children.values()].map(child => child.validate()),
+    ]);
+    return composeValidations(validations);
+  };
+
   const isFieldDisabled: FC["isFieldDisabled"] = key =>
     !!(ref.props.disabled || ref.state.disabled[key]);
 
@@ -125,7 +141,12 @@ export function createFormController<TSF, T>(
     await setValue(newValue);
   };
 
+  const getValidationForm: FC["getValidationForm"] = () =>
+    ref.props.validationForm || getDefaultValidationForm<TSF>();
+
   return {
+    add,
+    remove,
     getValue,
     setValue,
     setFieldsValue,
@@ -136,9 +157,11 @@ export function createFormController<TSF, T>(
     setFieldValidation,
     validateField,
     validateAllFields,
+    validate,
     isFieldDisabled,
     setFieldDisabled,
     clearValue,
     clearFieldsValue,
+    getValidationForm,
   };
 }

@@ -5,6 +5,7 @@ import {
   FormState,
   InferProps,
   OuterFormProps,
+  BaseParentForm,
 } from "./interface";
 import { createFormController } from "./createFormController";
 import { omitProps } from "./omitProps";
@@ -36,9 +37,36 @@ export const connectForm = <TSF,>() => (defaultValue: TSF) => <
       validation: {},
       disabled: {},
     } as any;
+    parent: BaseParentForm | null = null;
+
+    addChild() {
+      if (this.props.parent) {
+        this.parent = this.props.parent as any;
+        this.props.parent.add(this.form);
+      }
+    }
+
+    removeChild() {
+      if (this.parent) {
+        this.parent.remove(this.form);
+        this.parent = null;
+      }
+    }
+
+    componentDidMount() {
+      this.addChild();
+    }
 
     componentDidUpdate() {
+      if (this.parent !== this.props.parent) {
+        this.removeChild();
+        this.addChild();
+      }
       this.componentDidUpdateListeners.forEach(listener => listener());
+    }
+
+    componentWillUnmount() {
+      this.removeChild();
     }
 
     render(): React.ReactNode {

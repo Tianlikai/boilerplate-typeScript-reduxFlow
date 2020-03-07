@@ -8,12 +8,28 @@ export interface Validation {
   message?: React.ReactNode;
 }
 
+export interface ValidationForm<TSF> {
+  valid: boolean;
+  messages: { [K in keyof TSF]?: React.ReactNode };
+}
+
 /** 表单字段校验器 */
 export type SyncValidator<T> = (value: T) => Validation;
 export type AsyncValidator<T> = (value: T) => PromiseLike<Validation>;
 export type Validator<T> = SyncValidator<T> | AsyncValidator<T>;
 
-export interface FormController<TSF> {
+export type BaseParentForm = {
+  add: (form: BaseForm) => void;
+  remove: (form: BaseForm) => void;
+};
+
+export type BaseChildForm = {
+  validate: () => PromiseLike<Validation>;
+};
+
+export type BaseForm = BaseParentForm & BaseChildForm;
+
+export interface FormController<TSF> extends BaseForm {
   /**
    * 获取表单的值
    */
@@ -76,6 +92,10 @@ export interface FormController<TSF> {
    * 清空表单若干字段
    */
   clearFieldsValue<K extends keyof TSF>(keys: K[]): PromiseLike<void>;
+  /**
+   * 获取表单验证情况
+   */
+  getValidationForm(): ValidationForm<TSF>;
 }
 
 /** 表单校验工厂 */
@@ -108,7 +128,9 @@ export interface FormState<TSF> {
 export interface OuterFormProps<TSF> {
   disabled?: boolean;
   initValue?: TSF;
+  parent?: BaseParentForm;
   value?: TSF;
+  validationForm?: ValidationForm<TSF>;
   onChange?: (value: TSF) => void;
 }
 
@@ -137,3 +159,8 @@ export type FiledRender<TSF, K extends keyof TSF> = (
 export type BaseFiledRenderer<FieldValueType> = (
   props: BaseFieldRendererProps<FieldValueType>,
 ) => React.ReactNode;
+
+export type FiledRenderBinding<TSF> = {
+  name: keyof TSF;
+  render: BaseFiledRenderer<TSF[keyof TSF]>;
+};
