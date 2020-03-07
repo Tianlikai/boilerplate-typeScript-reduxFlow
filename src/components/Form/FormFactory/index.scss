@@ -1,0 +1,23 @@
+.SimpleFormItem {
+  margin-bottom: 15px;
+
+  &-label {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  &-error {
+    position: absolute;
+    display: block;
+    color: red;
+    font-size: 12px;
+  }
+
+  &-filedWrapper {
+
+    > input {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+}
