@@ -5,6 +5,7 @@ import {
   FormProps,
   Field,
 } from "../../../packages/type-safe-form";
+import "./simpleFormFactory.scss";
 
 const PREFIX = "SimpleForm";
 const FORM_ITEM = "SimpleFormItem";
