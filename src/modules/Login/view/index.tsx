@@ -1,17 +1,25 @@
-import { Button, Checkbox, Input } from "antd";
-import { CheckboxChangeEvent } from "antd/lib/checkbox";
-import classnames from "classnames";
+import { Button } from "antd";
 import _ from "lodash";
 import React from "react";
+import update from "immutability-helper";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import Particles from "react-particles-js";
 import EventListener from "react-event-listener";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
-import { navRoutes } from "../../../config";
 import { updateAuthenticated } from "../../Auth/action";
 import { isAuthenticatedSelector } from "../../Auth/selector";
+import {
+  BaseForm,
+  createSuperForm,
+  ValidationForm,
+  getDefaultValidationForm,
+} from "../../../packages/type-safe-form";
+import { navRoutes } from "../../../config";
+import { UserLoginForm } from "./LoginForm";
+import { LoginFormType } from "./interface";
+
 import "./index.scss";
 
 const mapStateToProps = createSelector(
@@ -23,11 +31,11 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ updateAuthenticated }, dispatch);
 
 const PREFIX = "Login";
-const PREFIX_FORM = "LoginForm";
+const PREFIX_FORM = "LoginFormWrapper";
 const USERNAME = "admin";
 const PASSWORD = "admin";
 
-const defaultState = {
+const DEFAULT_FORM_DATA = {
   username: "",
   password: "",
   isRemember: false,
@@ -43,47 +51,73 @@ enum ERROR_TYPE {
 type IProps = RouteComponentProps &
   ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
-type IState = typeof defaultState & {
+
+type IState = {
   errorType?: ERROR_TYPE;
+  formData: LoginFormType;
+  validationForm: ValidationForm<LoginFormType>;
 };
 
 class Login extends React.PureComponent<IProps, IState> {
-  readonly state: IState = defaultState;
+  state: IState = {
+    formData: DEFAULT_FORM_DATA,
+    validationForm: getDefaultValidationForm(),
+  };
+  superForm: BaseForm = createSuperForm();
 
   componentDidMount() {
+    const { formData } = this.state;
     const isRemember = localStorage.getItem("isRemember");
     const username = localStorage.getItem("username");
     if (isRemember === "1" && username) {
-      this.setState({ username, isRemember: true });
+      this.setState({
+        formData: { ...formData, username, isRemember: true },
+        validationForm: { ...getDefaultValidationForm(), valid: true },
+      });
     }
   }
 
-  handleUsernameChange = (e: React.FormEvent<HTMLInputElement>) =>
-    this.setState({ username: e.currentTarget.value });
+  handleChange = (formData: LoginFormType) => this.setState({ formData });
 
-  handlePasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ password: e.currentTarget.value });
-  };
-
-  handleRemember = (e: CheckboxChangeEvent) =>
-    this.setState({ isRemember: e.target.checked });
-
-  handleSubmit = () => {
-    const { username, password, isRemember } = this.state;
-    if (username !== USERNAME) {
-      return this.setState({ errorType: ERROR_TYPE.USERNAME_ERROR });
-    }
-    if (password !== PASSWORD) {
-      return this.setState({ errorType: ERROR_TYPE.PASSWORD_ERROR });
-    }
-    localStorage.setItem("isAuthenticated", "1");
-    this.props.updateAuthenticated({ isAuthenticated: true });
-    if (isRemember) {
-      localStorage.setItem("username", username);
-      localStorage.setItem("isRemember", "1");
-    } else {
-      localStorage.removeItem("username");
-      localStorage.removeItem("isRemember");
+  handleSubmit = async () => {
+    const validation = await this.superForm.validate();
+    if (validation.valid) {
+      const {
+        validationForm: { messages },
+        formData: { username, password, isRemember },
+      } = this.state;
+      if (username !== USERNAME) {
+        return this.setState({
+          validationForm: {
+            valid: false,
+            messages: update(messages, {
+              username: { $set: "用户名错误" },
+            }),
+          },
+        });
+      }
+      if (password !== PASSWORD) {
+        return this.setState({
+          validationForm: {
+            valid: false,
+            messages: update(messages, {
+              password: { $set: "密码错误" },
+            }),
+          },
+        });
+      }
+      this.setState({
+        validationForm: { ...getDefaultValidationForm(), valid: true },
+      });
+      localStorage.setItem("isAuthenticated", "1");
+      this.props.updateAuthenticated({ isAuthenticated: true });
+      if (isRemember) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("isRemember", "1");
+      } else {
+        localStorage.removeItem("username");
+        localStorage.removeItem("isRemember");
+      }
     }
   };
 
@@ -98,7 +132,7 @@ class Login extends React.PureComponent<IProps, IState> {
       isAuthenticated,
       location: { search },
     } = this.props;
-    const { username, password, isRemember, errorType } = this.state;
+    const { formData, validationForm } = this.state;
     const from = _.split(search, "?")[1] || navRoutes[0].url;
 
     return isAuthenticated ? (
@@ -108,45 +142,12 @@ class Login extends React.PureComponent<IProps, IState> {
         <Particles className={`${PREFIX}-bc`} />
         <div className={PREFIX_FORM}>
           <div className={`${PREFIX_FORM}-title`}>welcome</div>
-          <div className={`${PREFIX_FORM}-formItem`}>
-            <Input
-              className={`${PREFIX_FORM}-inp`}
-              type="text"
-              autoComplete="off"
-              placeholder="用户名"
-              value={username}
-              onChange={this.handleUsernameChange}
-            />
-            <div
-              className={classnames(`${PREFIX_FORM}-error`, {
-                ["is-hide"]: errorType !== ERROR_TYPE.USERNAME_ERROR,
-              })}
-            >
-              账号不存在，请重新输入
-            </div>
-          </div>
-          <div className={`${PREFIX_FORM}-formItem`}>
-            <Input
-              className={`${PREFIX_FORM}-inp`}
-              type="password"
-              autoComplete="off"
-              placeholder="密码"
-              value={password}
-              onChange={this.handlePasswordChange}
-            />
-            <div
-              className={classnames(`${PREFIX_FORM}-error`, {
-                ["is-hide"]: errorType !== ERROR_TYPE.PASSWORD_ERROR,
-              })}
-            >
-              密码错误，请重新输入
-            </div>
-          </div>
-          <div className={`${PREFIX_FORM}-checkBox`}>
-            <Checkbox onChange={this.handleRemember} checked={isRemember}>
-              记住我
-            </Checkbox>
-          </div>
+          <UserLoginForm
+            parent={this.superForm}
+            value={formData}
+            validationForm={validationForm}
+            onChange={this.handleChange}
+          />
           <Button
             className={`${PREFIX_FORM}-btn`}
             type="primary"

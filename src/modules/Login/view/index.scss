@@ -14,7 +14,7 @@
   }
 }
 
-.LoginForm {
+.LoginFormWrapper {
   width: 400px;
   margin: 0 auto;
   padding: 0 24px 60px;
@@ -26,29 +26,6 @@
     padding: 20px 0;
     font-weight: 500;
     font-size: 18px;
-  }
-
-  &-formItem {
-    margin-bottom: 20px;
-  }
-
-  &-inp {
-    height: 40px;
-    line-height: 40px;
-  }
-
-  &-error {
-    position: absolute;
-    color: red;
-    font-size: 12px;
-
-    &.is-hide {
-      display: none;
-    }
-  }
-
-  &-checkBox {
-    margin-bottom: 20px;
   }
 
   &-btn {
