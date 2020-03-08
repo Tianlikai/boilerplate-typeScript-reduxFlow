@@ -5,6 +5,7 @@ module.exports = {
   mode: "production",
   entry: {
     react: ["react", "react-dom", "react-router", "react-router-dom"],
+    eCharts: ["echarts"],
   },
   output: {
     path: path.resolve(__dirname, "../dll"),

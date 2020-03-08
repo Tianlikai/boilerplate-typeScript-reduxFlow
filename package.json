@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dll": "cross-env NODE_ENV=dll webpack --config webpack/index.js",
+    "dll": "rimraf dll/* && cross-env NODE_ENV=dll webpack --config webpack/index.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/index.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack/index.js",
     "analyzer": "cross-env NODE_ENV=analyzer webpack --config webpack/index.js",
