@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import { Dispatch, bindActionCreators } from "redux";
 import { rootSelector } from "../selector";
-import { searchActions } from "../action";
+import { searchArticleListActions } from "../action";
 import ListTable from "../components/ListTable";
 import "./index.scss";
 // import DrawerForm from "./DrawerForm";
@@ -12,30 +12,42 @@ import "./index.scss";
 const PREFIX = "List";
 
 const mapStateToProps = createSelector(rootSelector, state => ({
+  articleList: state.articleList,
   loading: state.loading,
-  page: state.page,
+  pageNumber: state.pageNumber,
   pageSize: state.pageSize,
+  total: state.total,
 }));
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ search: searchActions.request }, dispatch);
+  bindActionCreators(
+    { searchArticleList: searchArticleListActions.request },
+    dispatch,
+  );
 
 type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
 class List extends React.PureComponent<Props> {
   componentDidMount() {
-    this.props.search();
+    const { pageNumber, pageSize } = this.props;
+    this.props.searchArticleList({ pageNumber, pageSize });
   }
 
   render() {
-    const { loading } = this.props;
+    const { articleList, loading, pageNumber, pageSize, total } = this.props;
     return (
       <div className={PREFIX}>
-        <Button className={`${PREFIX}-create`} type="primary" size="large">
+        <Button className={`${PREFIX}-create`} type="primary">
           新建
         </Button>
-        <ListTable loading={loading} />
+        <ListTable
+          dataSource={articleList}
+          loading={loading}
+          pageNumber={pageNumber}
+          pageSize={pageSize}
+          total={total}
+        />
         {/* <DrawerForm /> */}
       </div>
     );
