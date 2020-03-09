@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import Particles from "react-particles-js";
 import EventListener from "react-event-listener";
-import { Redirect, RouteComponentProps, withRouter } from "react-router";
+import { RouteComponentProps, withRouter } from "react-router";
 import { updateAuthenticated } from "../../Auth/action";
 import { isAuthenticatedSelector } from "../../Auth/selector";
 import {
@@ -66,6 +66,10 @@ class Login extends React.PureComponent<IProps, IState> {
   superForm: BaseForm = createSuperForm();
 
   componentDidMount() {
+    const { isAuthenticated } = this.props;
+    if (isAuthenticated) {
+      this.redirect();
+    }
     const { formData } = this.state;
     const isRemember = localStorage.getItem("isRemember");
     const username = localStorage.getItem("username");
@@ -75,6 +79,24 @@ class Login extends React.PureComponent<IProps, IState> {
         validationForm: { ...getDefaultValidationForm(), valid: true },
       });
     }
+  }
+
+  componentDidUpdate(prevProps: IProps) {
+    if (
+      this.props.isAuthenticated !== prevProps.isAuthenticated &&
+      this.props.isAuthenticated
+    ) {
+      this.redirect();
+    }
+  }
+
+  redirect() {
+    const {
+      location: { search },
+      history,
+    } = this.props;
+    const from = _.split(search, "?")[1] || navRoutes[0].url;
+    history.replace(from);
   }
 
   handleChange = (formData: LoginFormType) => this.setState({ formData });
@@ -128,16 +150,9 @@ class Login extends React.PureComponent<IProps, IState> {
   };
 
   render() {
-    const {
-      isAuthenticated,
-      location: { search },
-    } = this.props;
     const { formData, validationForm } = this.state;
-    const from = _.split(search, "?")[1] || navRoutes[0].url;
 
-    return isAuthenticated ? (
-      <Redirect to={from} />
-    ) : (
+    return (
       <div className={PREFIX}>
         <Particles className={`${PREFIX}-bc`} />
         <div className={PREFIX_FORM}>

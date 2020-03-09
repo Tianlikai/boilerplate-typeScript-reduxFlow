@@ -22,7 +22,7 @@ import { NavRoutesProvider } from "./modules/Common/Header/NavRouterContext";
 import { isAuthenticatedSelector } from "./modules/Auth/selector";
 import { updateAuthenticated } from "./modules/Auth/action";
 import { RouteWithLayout } from "./components/RouteWithLayout";
-import { navRoutes } from "./config";
+import { navRoutes, LOGIN_URL } from "./config";
 
 dayJs.locale("zh-cn");
 
@@ -40,41 +40,54 @@ type AppProps = RouteComponentProps &
 
 class App extends React.PureComponent<AppProps> {
   componentDidMount() {
+    const {
+      location: { pathname },
+    } = this.props;
     const isAuthenticated = localStorage.getItem("isAuthenticated");
     if (isAuthenticated === "1") {
       this.props.updateAuthenticated({ isAuthenticated: true });
+    } else if (pathname !== LOGIN_URL) {
+      this.redirect();
     }
+  }
+
+  componentDidUpdate(prevProps: AppProps) {
+    if (
+      this.props.isAuthenticated !== prevProps.isAuthenticated &&
+      !this.props.isAuthenticated
+    ) {
+      this.redirect();
+    }
+  }
+
+  redirect() {
+    const {
+      location: { pathname },
+      history,
+    } = this.props;
+    history.replace(`${LOGIN_URL}?${pathname}`);
   }
 
   render() {
     const {
-      isAuthenticated,
-      location: { pathname },
       match: { path },
     } = this.props;
     return (
       <NavRoutesProvider value={{ navRoutes }}>
-        {isAuthenticated ? (
-          <Switch>
-            <Route path={`${path}login`} component={Login} />
-            <RouteWithLayout
-              path={`${path}dashboard`}
-              component={Dashboard}
-              layout={AppHeaderLayout}
-            />
-            <RouteWithLayout
-              path={`${path}list`}
-              component={List}
-              layout={AppHeaderLayout}
-            />
-            <Redirect to={`${path}dashboard`} />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path={`${path}login`} component={Login} />
-            <Redirect to={`${path}login?${pathname}`} />
-          </Switch>
-        )}
+        <Switch>
+          <Route path={`${path}login`} component={Login} />
+          <RouteWithLayout
+            path={`${path}dashboard`}
+            component={Dashboard}
+            layout={AppHeaderLayout}
+          />
+          <RouteWithLayout
+            path={`${path}list`}
+            component={List}
+            layout={AppHeaderLayout}
+          />
+          <Redirect to={`${path}dashboard`} />
+        </Switch>
       </NavRoutesProvider>
     );
   }
