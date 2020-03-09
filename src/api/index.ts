@@ -1,7 +1,7 @@
 import qs from "qs";
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { merge } from "lodash";
-import { Response } from "./model";
+import { Response } from "./interface";
 
 const defaultConfig: AxiosRequestConfig = {
   timeout: 60000,
