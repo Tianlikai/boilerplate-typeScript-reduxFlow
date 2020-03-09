@@ -35,30 +35,34 @@ class AppHeader extends React.PureComponent<Props> {
     return (
       <NavRoutesConsumer>
         {({ navRoutes }) => (
-          <div className={PREFIX}>
-            <div className={`${PREFIX}-inlineLeft`}>
-              <div className="NavLogo">
-                <div className="NavLogo-img">
-                  <img src={logoSrc} alt="logo" />
+          <div className="BaseHeaderBox">
+            <header className="BaseHeader">
+              <div className={PREFIX}>
+                <div className={`${PREFIX}-inlineLeft`}>
+                  <div className="NavLogo">
+                    <div className="NavLogo-img">
+                      <img src={logoSrc} alt="logo" />
+                    </div>
+                  </div>
+                  <div className="NavMenu">
+                    {_.map(navRoutes, nav => (
+                      <Link
+                        className={classnames("NavLink", {
+                          "is-active": matchPath(url, { path: nav.url }),
+                        })}
+                        key={nav.url}
+                        to={nav.url}
+                      >
+                        <span className="NavLink-anchor">{nav.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                <div className={`${PREFIX}-inlineRight`}>
+                  <AppHeadOverlay logout={this.handleLogout} />
                 </div>
               </div>
-              <div className="NavMenu">
-                {_.map(navRoutes, nav => (
-                  <Link
-                    className={classnames("NavLink", {
-                      "is-active": matchPath(url, { path: nav.url }),
-                    })}
-                    key={nav.url}
-                    to={nav.url}
-                  >
-                    <span className="NavLink-anchor">{nav.label}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className={`${PREFIX}-inlineRight`}>
-              <AppHeadOverlay logout={this.handleLogout} />
-            </div>
+            </header>
           </div>
         )}
       </NavRoutesConsumer>

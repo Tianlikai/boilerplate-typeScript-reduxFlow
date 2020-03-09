@@ -4,7 +4,21 @@ $appHeaderHeight: 60px;
 
 .#{$prefixAppHeaderLayout} {
   width: 100%;
-  height: 100%;
+}
+
+.BaseHeaderBox {
+  position: relative;
+  height: $appHeaderHeight;
+}
+
+.BaseHeader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  transform: translateZ(0);
+  transition: all 0.2s;
 }
 
 .#{$prefixAppHeader} {

@@ -1,7 +1,33 @@
 .ListTable {
 
+  &-antTable {
+    background-color: white;
+  }
+
   &-pagination {
     margin-top: 16px;
     text-align: right;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .ListTable {
+
+    &-operation {
+      display: inline-block;
+
+      &Btn {
+        display: block;
+      }
+
+      &Btn:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      &Divider {
+        display: none;
+      }
+    }
   }
 }

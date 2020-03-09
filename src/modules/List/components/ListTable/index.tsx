@@ -80,11 +80,18 @@ const ListTable: React.FC<Props> = ({
       render: (item: any, record: Article) => {
         return (
           <div className={`${PREFIX}-operation`}>
-            <Button size="small">编辑</Button>
+            <Button className={`${PREFIX}-operationBtn`} size="small">
+              编辑
+            </Button>
             {record.status === ArticleStatus.DRAFT && (
               <>
-                <Divider type="vertical" />
-                <Button size="small">发布</Button>
+                <Divider
+                  className={`${PREFIX}-operationDivider`}
+                  type="vertical"
+                />
+                <Button className={`${PREFIX}-operationBtn`} size="small">
+                  发布
+                </Button>
               </>
             )}
           </div>

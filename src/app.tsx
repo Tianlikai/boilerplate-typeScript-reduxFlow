@@ -23,6 +23,7 @@ import { isAuthenticatedSelector } from "./modules/Auth/selector";
 import { updateAuthenticated } from "./modules/Auth/action";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { navRoutes, LOGIN_URL } from "./config";
+import "./index.scss";
 
 dayJs.locale("zh-cn");
 
