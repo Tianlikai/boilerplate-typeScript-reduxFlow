@@ -1,16 +1,28 @@
-import { put, takeLatest, delay } from "redux-saga/effects";
-import { searchActions } from "./action";
+import { put, takeLatest, call } from "redux-saga/effects";
+import { searchArticleListActions } from "./action";
+import Api from "./api";
 
-function* searchWorker() {
+function* searchArticleListWorker(
+  action: ReturnType<typeof searchArticleListActions.request>,
+) {
   try {
-    yield delay(1000);
-    yield put(searchActions.success());
+    const res: SR<typeof Api.postArticleList> = yield call(
+      Api.postArticleList,
+      action.payload,
+    );
+    if (res.errorCode === 0) {
+      const { data } = res;
+      yield put(searchArticleListActions.success(data));
+    }
   } catch (error) {
     console.log(error);
-    yield put(searchActions.failure());
+    yield put(searchArticleListActions.failure());
   }
 }
 
 export function* listSaga() {
-  yield takeLatest(searchActions.request.match, searchWorker);
+  yield takeLatest(
+    searchArticleListActions.request.match,
+    searchArticleListWorker,
+  );
 }

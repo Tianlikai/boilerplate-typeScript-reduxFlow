@@ -1,35 +1,38 @@
 import update from "immutability-helper";
 import { AnyAction } from "redux";
-import { searchActions } from "./action";
+import { searchArticleListActions } from "./action";
+import { Article } from "./interface";
 
 interface State {
+  articleList: Article[];
   loading: boolean;
-  page: number;
+  pageNumber: number;
   pageSize: number;
-  data: any[];
-  searchKeywords: string;
+  total: number;
 }
 
 const initState: State = {
+  articleList: [],
   loading: false,
-  page: 1,
+  pageNumber: 1,
   pageSize: 10,
-  data: [],
-  searchKeywords: "",
+  total: 0,
 };
 
 export const listReducer = (state = initState, action: AnyAction): State => {
-  if (searchActions.request.match(action)) {
+  if (searchArticleListActions.request.match(action)) {
     return update(state, {
       loading: { $set: true },
     });
   }
-  if (searchActions.success.match(action)) {
+  if (searchArticleListActions.success.match(action)) {
     return update(state, {
       loading: { $set: false },
+      total: { $set: action.payload.total },
+      articleList: { $set: action.payload.articleList },
     });
   }
-  if (searchActions.failure.match(action)) {
+  if (searchArticleListActions.failure.match(action)) {
     return update(state, {
       loading: { $set: false },
     });
