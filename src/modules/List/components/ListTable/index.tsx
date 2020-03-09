@@ -79,7 +79,7 @@ const ListTable: React.FC<Props> = ({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (item: any, record: Article) => {
         return (
-          <>
+          <div className={`${PREFIX}-operation`}>
             <Button size="small">编辑</Button>
             {record.status === ArticleStatus.DRAFT && (
               <>
@@ -87,7 +87,7 @@ const ListTable: React.FC<Props> = ({
                 <Button size="small">发布</Button>
               </>
             )}
-          </>
+          </div>
         );
       },
     },
