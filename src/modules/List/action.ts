@@ -5,6 +5,6 @@ const NAMESPACE = "LIST";
 
 export const searchArticleListActions = AsyncGroupCreator<
   PostArticleListRequest,
-  ArticleListResponse["data"],
+  ArticleListResponse["data"] & { pageNumber: number; pageSize: number },
   void
 >(`${NAMESPACE}/initList`);

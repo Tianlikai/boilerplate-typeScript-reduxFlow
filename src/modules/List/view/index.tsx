@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "antd";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import { Dispatch, bindActionCreators } from "redux";
 import { rootSelector } from "../selector";
 import { searchArticleListActions } from "../action";
 import ListTable from "../components/ListTable";
+import CustomButton from "../../../components/CustomButton";
 import "./index.scss";
 // import DrawerForm from "./DrawerForm";
 
@@ -34,19 +34,24 @@ class List extends React.PureComponent<Props> {
     this.props.searchArticleList({ pageNumber, pageSize });
   }
 
+  onPageSizeChange = (pageNumber: number, pageSize: number) => {
+    this.props.searchArticleList({ pageNumber, pageSize });
+  };
+
   render() {
     const { articleList, loading, pageNumber, pageSize, total } = this.props;
     return (
       <div className={PREFIX}>
-        <Button className={`${PREFIX}-create`} type="primary">
+        <CustomButton className={`${PREFIX}-create`} type="primary">
           新建
-        </Button>
+        </CustomButton>
         <ListTable
           dataSource={articleList}
           loading={loading}
           pageNumber={pageNumber}
           pageSize={pageSize}
           total={total}
+          onPageSizeChange={this.onPageSizeChange}
         />
         {/* <DrawerForm /> */}
       </div>

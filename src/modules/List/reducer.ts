@@ -27,9 +27,11 @@ export const listReducer = (state = initState, action: AnyAction): State => {
   }
   if (searchArticleListActions.success.match(action)) {
     return update(state, {
-      loading: { $set: false },
-      total: { $set: action.payload.total },
       articleList: { $set: action.payload.articleList },
+      loading: { $set: false },
+      pageNumber: { $set: action.payload.pageNumber },
+      pageSize: { $set: action.payload.pageSize },
+      total: { $set: action.payload.total },
     });
   }
   if (searchArticleListActions.failure.match(action)) {

@@ -1,0 +1,18 @@
+.CustomButton {
+
+  &-primary {
+    background-color: rgba(87, 166, 175, 0.9);
+    border-color: rgba(87, 166, 175, 0.9);
+
+    &:hover {
+      background-color: rgba(87, 166, 175, 0.8);
+      border-color: rgba(87, 166, 175, 0.8);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(87, 166, 175, 1);
+      border-color: rgba(87, 166, 175, 1);
+    }
+  }
+}

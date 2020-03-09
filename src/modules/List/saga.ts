@@ -12,7 +12,9 @@ function* searchArticleListWorker(
     );
     if (res.errorCode === 0) {
       const { data } = res;
-      yield put(searchArticleListActions.success(data));
+      yield put(
+        searchArticleListActions.success({ ...data, ...action.payload }),
+      );
     }
   } catch (error) {
     console.log(error);
