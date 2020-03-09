@@ -13,12 +13,12 @@ const FormRenderer = simpleFormFactory<LoginFormType>({
     {
       label: "用户名",
       name: "username",
-      render: InputFactory({ type: "text" }),
+      render: InputFactory({ type: "text", placeholder: "请输入用户名" }),
     },
     {
       label: "密码",
       name: "password",
-      render: InputFactory({ type: "password" }),
+      render: InputFactory({ type: "password", placeholder: "请输入密码" }),
     },
     {
       label: "记住我",
