@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Icon } from "antd";
 import { Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -23,6 +24,9 @@ class UnConnectDashboard extends React.PureComponent<Props> {
   render() {
     return (
       <div className={PREFIX}>
+        <Helmet>
+          <title>仪表盘</title>
+        </Helmet>
         <div className={`${PREFIX}-header`}>
           <Icon className={`${PREFIX}-headerIcon`} type="dashboard" />
           <span className={`${PREFIX}-headerText`}>仪表盘</span>

@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import _ from "lodash";
 import React from "react";
+import { Helmet } from "react-helmet";
 import update from "immutability-helper";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
@@ -154,6 +155,9 @@ class Login extends React.PureComponent<IProps, IState> {
 
     return (
       <div className={PREFIX}>
+        <Helmet>
+          <title>登录</title>
+        </Helmet>
         <Particles className={`${PREFIX}-bc`} />
         <div className={PREFIX_FORM}>
           <div className={`${PREFIX_FORM}-title`}>welcome</div>
