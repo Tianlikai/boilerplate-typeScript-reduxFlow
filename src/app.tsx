@@ -87,7 +87,7 @@ class App extends React.PureComponent<AppProps> {
             component={List}
             layout={AppHeaderLayout}
           />
-          <Redirect to={`${path}dashboard`} />
+          <Redirect to={`${path}list`} />
         </Switch>
       </NavRoutesProvider>
     );
