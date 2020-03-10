@@ -42,12 +42,14 @@ type AppProps = RouteComponentProps &
 class App extends React.PureComponent<AppProps> {
   componentDidMount() {
     const {
+      isAuthenticated,
       location: { pathname },
+      updateAuthenticated,
     } = this.props;
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (isAuthenticated === "1") {
-      this.props.updateAuthenticated({ isAuthenticated: true });
-    } else if (pathname !== LOGIN_URL) {
+    const isAuthenticatedFromLocal = localStorage.getItem("isAuthenticated");
+    if (isAuthenticatedFromLocal === "1") {
+      updateAuthenticated({ isAuthenticated: true });
+    } else if (!isAuthenticated && pathname !== LOGIN_URL) {
       this.redirect();
     }
   }
