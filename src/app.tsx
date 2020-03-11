@@ -20,11 +20,10 @@ import { List } from "./modules/List";
 import { AppHeaderLayout } from "./modules/Common/Header";
 import { NavRoutesProvider } from "./modules/Common/Header/NavRouterContext";
 import { isAuthenticatedSelector } from "./modules/Auth/selector";
+import { I18nProvider } from "./modules/Common/I18n/components/I18nProvider";
 import { updateAuthenticated } from "./modules/Auth/action";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { navRoutes, LOGIN_URL } from "./config";
-
-import { ZH_CN, I18nProvider } from "./packages/I18nProvider";
 
 import "./index.scss";
 
@@ -108,13 +107,13 @@ const RootApp: React.SFC<{ store: any; history: History<any> }> = ({
   history,
 }) => {
   return (
-    <I18nProvider locale={ZH_CN}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <I18nProvider>
         <ConnectedRouter history={history}>
           <ConnectedApp />
         </ConnectedRouter>
-      </Provider>
-    </I18nProvider>
+      </I18nProvider>
+    </Provider>
   );
 };
 
