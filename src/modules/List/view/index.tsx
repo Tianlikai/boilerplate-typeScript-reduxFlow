@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage, defineMessages } from "react-intl";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
@@ -11,6 +12,12 @@ import "./index.scss";
 // import DrawerForm from "./DrawerForm";
 
 const PREFIX = "List";
+const MESSAGES = defineMessages({
+  create: {
+    id: "List.create",
+    defaultMessage: "创建",
+  },
+});
 
 const mapStateToProps = createSelector(rootSelector, state => ({
   articleList: state.articleList,
@@ -47,7 +54,7 @@ class List extends React.PureComponent<Props> {
           <title>表格</title>
         </Helmet>
         <CustomButton className={`${PREFIX}-create`} type="primary">
-          新建
+          <FormattedMessage {...MESSAGES.create} />
         </CustomButton>
         <ListTable
           dataSource={articleList}

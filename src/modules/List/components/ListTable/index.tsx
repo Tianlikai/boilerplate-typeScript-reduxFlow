@@ -1,5 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
+import { defineMessages, FormattedMessage } from "react-intl";
 import { Table, Button, Pagination, Divider } from "antd";
 import { ColumnProps } from "antd/lib/table";
 import _ from "lodash";
@@ -9,6 +10,16 @@ import "./index.scss";
 
 const PREFIX = "ListTable";
 const FORMAT = "YYYY-MM-DD HH:mm:ss";
+const MESSAGES = defineMessages({
+  name: {
+    id: "ListTable.name",
+    defaultMessage: "文章名称",
+  },
+  coverUrl: {
+    id: "ListTable.coverUrl",
+    defaultMessage: "文章封面",
+  },
+});
 
 interface Props {
   className?: string;
@@ -45,11 +56,11 @@ const ListTable: React.FC<Props> = ({
   const columns: Array<ColumnProps<Article>> = [
     {
       dataIndex: "name",
-      title: "文章名称",
+      title: <FormattedMessage {...MESSAGES.name} />,
     },
     {
       dataIndex: "coverUrl",
-      title: "文章封面",
+      title: <FormattedMessage {...MESSAGES.coverUrl} />,
     },
     {
       dataIndex: "status",

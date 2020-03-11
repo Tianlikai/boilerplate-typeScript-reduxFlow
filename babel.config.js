@@ -25,6 +25,13 @@ module.exports = function(api) {
       },
       "antd",
     ],
+    [
+      "react-intl",
+      {
+        messagesDir: "./reactIntl/messages/",
+        removeDefaultMessage: false,
+      },
+    ],
   ];
 
   return {

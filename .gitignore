@@ -9,6 +9,9 @@
 # production
 /dist
 
+# react-intl
+/reactIntl
+
 # misc
 .DS_Store
 .vscode

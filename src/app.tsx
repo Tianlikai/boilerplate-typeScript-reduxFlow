@@ -23,6 +23,9 @@ import { isAuthenticatedSelector } from "./modules/Auth/selector";
 import { updateAuthenticated } from "./modules/Auth/action";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { navRoutes, LOGIN_URL } from "./config";
+
+import { ZH_CN, I18nProvider } from "./packages/I18nProvider";
+
 import "./index.scss";
 
 dayJs.locale("zh-cn");
@@ -105,11 +108,13 @@ const RootApp: React.SFC<{ store: any; history: History<any> }> = ({
   history,
 }) => {
   return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <ConnectedApp />
-      </ConnectedRouter>
-    </Provider>
+    <I18nProvider locale={ZH_CN}>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <ConnectedApp />
+        </ConnectedRouter>
+      </Provider>
+    </I18nProvider>
   );
 };
 
