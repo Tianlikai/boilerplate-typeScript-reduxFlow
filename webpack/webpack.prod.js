@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const AntdDayjsWebpackPlugin  = require("antd-dayjs-webpack-plugin");
 /** TODO: 生产环境打包会丢失html tag & css selector样式 */
 // const PurgecssPlugin = require("purgecss-webpack-plugin");
 
@@ -121,6 +122,7 @@ module.exports = {
       filename: "[name].[chunkhash:8].css",
       chunkFilename: "[id].[chunkhash:8].css",
     }),
+    new AntdDayjsWebpackPlugin(),
     // new PurgecssPlugin({
     //   paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     // }),
