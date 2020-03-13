@@ -2,7 +2,7 @@ import "dayjs/locale/zh-cn";
 import "dayjs/locale/en";
 import dayJs from "dayjs";
 import React from "react";
-import { LocaleProvider } from "antd";
+import { ConfigProvider } from "antd";
 import {
   createIntl,
   createIntlCache,
@@ -79,7 +79,7 @@ export class UnconnectedI18nProvider extends React.Component<
     const { intl } = this.state;
     return (
       <RawIntlProvider key={locale} value={intl}>
-        <LocaleProvider locale={ANT_LOCALES[locale]}>{children}</LocaleProvider>
+        <ConfigProvider locale={ANT_LOCALES[locale]}>{children}</ConfigProvider>
       </RawIntlProvider>
     );
   }

@@ -11,5 +11,5 @@ export const SelectFactory = (
     "values" | "onChange" | "disabled" | "triggerContent"
   >,
 ): BaseFiledRenderer<string[]> => ({ value, onChange }) => {
-  return <Select mode="default" onChange={onChange} value={value} {...props} />;
+  return <Select onChange={onChange} value={value} {...props} />;
 };

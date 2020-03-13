@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Icon } from "antd";
+import { DashboardOutlined } from "@ant-design/icons";
 import { Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import SideMenu from "../component/SideMenu";
@@ -28,7 +28,7 @@ class UnConnectDashboard extends React.PureComponent<Props> {
           <title>仪表盘</title>
         </Helmet>
         <div className={`${PREFIX}-header`}>
-          <Icon className={`${PREFIX}-headerIcon`} type="dashboard" />
+          <DashboardOutlined className={`${PREFIX}-headerIcon`} />
           <span className={`${PREFIX}-headerText`}>仪表盘</span>
         </div>
         <div className={`${PREFIX}-wrap`}>

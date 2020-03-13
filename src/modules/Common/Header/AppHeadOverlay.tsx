@@ -1,5 +1,6 @@
 import React from "react";
-import { Dropdown, Icon, Menu } from "antd";
+import { Dropdown, Menu } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 interface Props {
   logout: () => void;
@@ -13,7 +14,7 @@ const AppHeadOverlay: React.FC<Props> = ({ logout }) => {
   );
   return (
     <Dropdown overlay={menu} placement="bottomLeft">
-      <Icon className="AppHeadOverlay-icon" type="user" />
+      <UserOutlined className="AppHeadOverlay-icon" />
     </Dropdown>
   );
 };
