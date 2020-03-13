@@ -1,3 +1,6 @@
+import "dayjs/locale/zh-cn";
+import "dayjs/locale/en";
+import dayJs from "dayjs";
 import React from "react";
 import { LocaleProvider } from "antd";
 import {
@@ -9,7 +12,7 @@ import {
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import { Dispatch, bindActionCreators } from "redux";
-import { ZH_CN, antLocales } from "../../constant";
+import { ZH_CN, ANT_LOCALES, DAYJS_LOCALES } from "../../constant";
 import { rootSelector } from "../../selector";
 import { updateI18nActions, initI18nAction } from "../../action";
 
@@ -23,6 +26,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     { initI18n: initI18nAction, updateI18: updateI18nActions.request },
     dispatch,
   );
+
+dayJs.locale(DAYJS_LOCALES[ZH_CN]);
 
 const cache = createIntlCache();
 
@@ -64,6 +69,7 @@ export class UnconnectedI18nProvider extends React.Component<
         },
         cache,
       );
+      dayJs.locale(DAYJS_LOCALES[locale]);
       this.setState({ intl: intlContext });
     }
   }
@@ -73,7 +79,7 @@ export class UnconnectedI18nProvider extends React.Component<
     const { intl } = this.state;
     return (
       <RawIntlProvider key={locale} value={intl}>
-        <LocaleProvider locale={antLocales[locale]}>{children}</LocaleProvider>
+        <LocaleProvider locale={ANT_LOCALES[locale]}>{children}</LocaleProvider>
       </RawIntlProvider>
     );
   }

@@ -1,4 +1,3 @@
-import dayJs from "dayjs";
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { createSelector } from "reselect";
@@ -13,7 +12,6 @@ import {
   Route,
 } from "react-router-dom";
 import { History } from "history";
-import "dayjs/locale/zh-cn";
 import { Login } from "./modules/Login";
 import { Dashboard } from "./modules/Dashboard";
 import { List } from "./modules/List";
@@ -26,8 +24,6 @@ import { RouteWithLayout } from "./components/RouteWithLayout";
 import { navRoutes, LOGIN_URL } from "./config";
 
 import "./index.scss";
-
-dayJs.locale("zh-cn");
 
 const mapStateToProps = createSelector(
   isAuthenticatedSelector,
