@@ -55,6 +55,9 @@ module.exports = {
       template: path.resolve(__dirname, "../public", "index.html"),
       inject: true,
       favicon: path.resolve(__dirname, "../public", "rl.ico"),
+      minify: {
+        collapseWhitespace: true,
+      },
     }),
     new HardSourceWebpackPlugin(),
   ],

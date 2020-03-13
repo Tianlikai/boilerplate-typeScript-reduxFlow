@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const AntdDayjsWebpackPlugin  = require("antd-dayjs-webpack-plugin");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 /** TODO: 生产环境打包会丢失html tag & css selector样式 */
 // const PurgecssPlugin = require("purgecss-webpack-plugin");
 
@@ -92,7 +92,17 @@ module.exports = {
         },
         canPrint: true,
       }),
-      new TerserPlugin({ cache: true, parallel: true }),
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        /** 一下两项同时配置，去除所有的注释 */
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
     ],
     splitChunks: {
       chunks: "all",
