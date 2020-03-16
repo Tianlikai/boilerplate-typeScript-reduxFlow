@@ -84,6 +84,7 @@ export class BootStrap {
     initialState: any,
   ) {
     flexible();
+    window.addEventListener("resize", flexible);
     this.root = root;
     const store = this.initStore(customMiddleware, history, initialState);
     const HotRootApp = this.HotRootApp;

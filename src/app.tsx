@@ -15,6 +15,7 @@ import { History } from "history";
 import { Login } from "./modules/Login";
 import { Dashboard } from "./modules/Dashboard";
 import { List } from "./modules/List";
+import { ArticleList } from "./modules/ArticleList";
 import { AppHeaderLayout } from "./modules/Common/Header";
 import { NavRoutesProvider } from "./modules/Common/Header/NavRouterContext";
 import { isAuthenticatedSelector } from "./modules/Auth/selector";
@@ -87,7 +88,12 @@ class App extends React.PureComponent<AppProps> {
             component={List}
             layout={AppHeaderLayout}
           />
-          <Redirect to={`${path}list`} />
+          <RouteWithLayout
+            path={`${path}articleList`}
+            component={ArticleList}
+            layout={AppHeaderLayout}
+          />
+          <Redirect to={`${path}articleList`} />
         </Switch>
       </NavRoutesProvider>
     );

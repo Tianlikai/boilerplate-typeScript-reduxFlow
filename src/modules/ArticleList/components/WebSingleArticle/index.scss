@@ -1,0 +1,103 @@
+.WebSingleArticleWrapper {
+  float: left;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.WebSingleArticle {
+  position: relative;
+  width: 243px;
+  height: 289px;
+  overflow: hidden;
+  background: white;
+  border-radius: 4px;
+  transition: all 0.3s ease-in;
+
+  > a {
+    display: block;
+    color: #27282d;
+    text-decoration: none;
+    outline: none;
+  }
+
+  &-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 137px;
+    transition: all 0.3s ease-in;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 12px;
+  }
+
+  &-title {
+    display: -webkit-box;
+    height: 48px;
+    margin-bottom: 54px;
+    overflow: hidden;
+    color: #27282d;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease-in;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &-status {
+    display: flex;
+    justify-content: space-between;
+    color: #bfbfbf;
+    font-size: 12px;
+
+    &Info {
+      display: flex;
+    }
+
+    &Comments {
+      margin-right: 10px;
+    }
+  }
+
+  &-author {
+    position: absolute;
+    bottom: 48px;
+    left: 12px;
+    transition: all 0.3s ease-in;
+
+    &Link {
+      color: #666;
+    }
+  }
+
+  &:hover {
+    background-color: #eaeaea;
+
+    .WebSingleArticle-img {
+      top: -10px;
+    }
+
+    .WebSingleArticle-title {
+      height: 58px;
+      line-height: 28px;
+    }
+
+    .WebSingleArticle-author {
+      bottom: 58px;
+    }
+  }
+}

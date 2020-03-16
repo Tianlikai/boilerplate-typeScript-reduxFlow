@@ -99,3 +99,13 @@ $appHeaderHeight: 60px;
   font-size: 16px;
   cursor: pointer;
 }
+
+@media (max-width: 769px) {
+  .#{$prefixAppHeader} {
+    padding: 0 8px;
+  }
+
+  .NavMenu {
+    display: none;
+  }
+}

@@ -1,0 +1,30 @@
+.ArticleList {
+  position: relative;
+  left: 8px;
+  width: 1036px;
+  margin: 30px auto 60px;
+
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+@media (max-width: 769px) {
+
+  .ArticleList {
+    left: 0;
+    width: 100%;
+    margin: 0;
+    background-color: #fff;
+  }
+
+  .WebSingleArticleWrapper {
+    display: none;
+  }
+
+  .PhoneSingleArticle {
+    display: block;
+  }
+}
