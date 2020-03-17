@@ -2,6 +2,7 @@ import React from "react";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { Article } from "../../interface";
+import { IMAGES_SOURCE_ADDRESS } from "../../constant";
 import "./index.scss";
 
 const PREFIX = "PhoneSingleArticle";
@@ -15,9 +16,9 @@ export const PhoneSingleArticle: React.FC<PhoneSingleArticleProps> = ({
 }) => (
   <>
     {map(articles, article => (
-      <div className={`${PREFIX}`}>
+      <div key={article.id} className={`${PREFIX}`}>
         <Link to="#" className={`${PREFIX}-img`}>
-          <img src={article.imgUrl} />
+          <img src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`} />
         </Link>
         <div className={`${PREFIX}-content`}>
           <Link to="#" className={`${PREFIX}-link`}>

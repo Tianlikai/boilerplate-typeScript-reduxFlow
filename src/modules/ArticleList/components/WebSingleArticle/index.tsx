@@ -3,6 +3,7 @@ import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { MessageOutlined, LikeOutlined } from "@ant-design/icons";
 import { Article } from "../../interface";
+import { IMAGES_SOURCE_ADDRESS } from "../../constant";
 import "./index.scss";
 
 const PREFIX = "WebSingleArticle";
@@ -16,11 +17,11 @@ export const WebSingleArticle: React.FC<WebSingleArticleProps> = ({
 }) => (
   <>
     {map(articles, (article, i) => (
-      <div key={i} className={`${PREFIX}Wrapper`}>
+      <div key={article.id} className={`${PREFIX}Wrapper`}>
         <div className={PREFIX}>
           <Link to="#">
             <div className={`${PREFIX}-img`}>
-              <img src={article.imgUrl} />
+              <img src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`} />
             </div>
             <div className={`${PREFIX}-content`}>
               <div className={`${PREFIX}-title`}>{article.title}</div>

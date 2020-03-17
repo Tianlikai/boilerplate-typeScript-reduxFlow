@@ -1,25 +1,31 @@
 import React from "react";
-import { PhoneSingleArticle } from "../components/PhoneSingleArticle";
-import { WebSingleArticle } from "../components/WebSingleArticle";
-import "./index.scss";
-import { rootSelector } from "../selector";
+import { Helmet } from "react-helmet";
 import { Dispatch, bindActionCreators } from "redux";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
+import { PhoneSingleArticle } from "../components/PhoneSingleArticle";
+import { WebSingleArticle } from "../components/WebSingleArticle";
+import { rootSelector, articleListSelector } from "../selector";
 import { updateViewPortInfo, fetchArticleListActions } from "../action";
+import "./index.scss";
 
 const PREFIX = "ArticleList";
 
-const mapStateToProps = createSelector(rootSelector, state => ({
-  articleList: state.articleList,
-  loading: state.loading,
-  innerHeight: state.innerHeight,
-  lastScroll: state.lastScroll,
-  pageNumber: state.pageNumber,
-  pageSize: state.pageSize,
-  topViewPort: state.topViewPort,
-  bottomViewPort: state.bottomViewPort,
-}));
+const mapStateToProps = createSelector(
+  rootSelector,
+  articleListSelector,
+  (state, articleList) => ({
+    articleList: articleList,
+    loading: state.loading,
+    innerHeight: state.innerHeight,
+    lastScroll: state.lastScroll,
+    pageNumber: state.pageNumber,
+    pageSize: state.pageSize,
+    total: state.total,
+    topViewPort: state.topViewPort,
+    bottomViewPort: state.bottomViewPort,
+  }),
+);
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -48,7 +54,7 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
 
   handleScroll = (force: boolean) => {
     clearTimeout(this.timer);
-    const { lastScroll } = this.props;
+    const { articleList, lastScroll, total } = this.props;
     const { innerHeight, scrollY } = window;
     // 如果时间间隔内，没有发生滚动，并且未强制触发，重启定时器并且返回
     if (force || lastScroll < scrollY) {
@@ -60,7 +66,10 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
         topViewPort,
         bottomViewPort,
       });
-      if (scrollY + innerHeight + 200 > document.body.scrollHeight) {
+      if (
+        scrollY + innerHeight + 200 > document.body.scrollHeight &&
+        total > articleList.length
+      ) {
         const { loading, pageNumber, pageSize, fetchArticleList } = this.props;
         !loading && fetchArticleList({ pageNumber, pageSize });
       }
@@ -69,15 +78,21 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
   };
 
   render() {
-    const { articleList } = this.props;
+    const { articleList, total } = this.props;
     return (
       <>
+        <Helmet>
+          <title>列表</title>
+        </Helmet>
         <div className={`${PREFIX} ${PREFIX}-web`}>
           <WebSingleArticle articles={articleList} />
         </div>
         <div className={`${PREFIX} ${PREFIX}-phone`}>
           <PhoneSingleArticle articles={articleList} />
         </div>
+        {articleList.length !== 0 && articleList.length >= total && (
+          <div className={`${PREFIX}-end`}>没有更多内容了!!!</div>
+        )}
       </>
     );
   }

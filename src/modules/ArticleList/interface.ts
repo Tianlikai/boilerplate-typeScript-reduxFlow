@@ -8,7 +8,6 @@ export interface Attachment {
 
 export interface Article {
   id: number;
-  imgUrl: string;
   title: React.ReactNode;
   author: React.ReactNode;
   publishTime: number;
@@ -23,6 +22,7 @@ export interface PostArticleListRequest {
 
 export interface ArticleListResponse extends Response {
   data: {
+    total: number;
     articleList: Article[];
   };
 }

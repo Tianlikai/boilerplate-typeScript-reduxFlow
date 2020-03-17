@@ -2,7 +2,7 @@
   position: relative;
   left: 8px;
   width: 1036px;
-  margin: 30px auto 60px;
+  margin: 30px auto 30px;
 
   & a:visited {
     color: #909090;
@@ -12,6 +12,11 @@
     display: block;
     clear: both;
     content: "";
+  }
+
+  &-end {
+    margin-bottom: 60px;
+    text-align: center;
   }
 }
 @media (min-width: 769px) {
