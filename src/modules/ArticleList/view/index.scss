@@ -4,6 +4,10 @@
   width: 1036px;
   margin: 30px auto 60px;
 
+  & a:visited {
+    color: #909090;
+  }
+
   &::after {
     display: block;
     clear: both;
@@ -37,6 +41,7 @@
 
     &-phone {
       display: block;
+      padding-top: 8px;
     }
   }
 }

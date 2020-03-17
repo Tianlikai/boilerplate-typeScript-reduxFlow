@@ -63,6 +63,7 @@
     justify-content: space-between;
     color: #bfbfbf;
     font-size: 12px;
+    transition: all 0.3s ease-in;
 
     &Info {
       display: flex;
@@ -92,12 +93,15 @@
     }
 
     .WebSingleArticle-title {
-      height: 58px;
-      line-height: 28px;
+      margin-bottom: 60px;
     }
 
     .WebSingleArticle-author {
-      bottom: 58px;
+      bottom: 52px;
+    }
+
+    .WebSingleArticle-status {
+      margin-bottom: 4px;
     }
   }
 }
