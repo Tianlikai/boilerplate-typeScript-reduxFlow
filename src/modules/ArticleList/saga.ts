@@ -1,5 +1,7 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { map } from "lodash";
+import { put, takeLatest, call, select } from "redux-saga/effects";
 import { fetchArticleListActions } from "./action";
+import { articleListSelector } from "./selector";
 import Api from "./api";
 
 function* fetchArticleListWorker(
@@ -11,12 +13,26 @@ function* fetchArticleListWorker(
       action.payload,
     );
     if (res.errorCode === 0) {
-      const { data } = res;
+      const { pageNumber, pageSize } = action.payload;
+      const articleList: SR<typeof articleListSelector> = yield select(
+        articleListSelector,
+      );
+      const { articleList: newArticleList, total } = res.data;
+      const nextArticleList = [
+        ...articleList,
+        ...map(newArticleList, article => {
+          return {
+            ...article,
+            id: parseInt(`${pageNumber - 1}${article.id}`),
+          };
+        }),
+      ];
       yield put(
         fetchArticleListActions.success({
-          ...data,
-          ...action.payload,
-          pageNumber: action.payload.pageNumber + 1,
+          pageSize,
+          total,
+          articleList: nextArticleList,
+          pageNumber: pageNumber + 1,
         }),
       );
     }

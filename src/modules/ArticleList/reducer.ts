@@ -40,13 +40,9 @@ export const articleListReducer = (
     });
   }
   if (fetchArticleListActions.success.match(action)) {
-    const nextArticleList = [
-      ...state.articleList,
-      ...action.payload.articleList,
-    ];
     return update(state, {
       loading: { $set: false },
-      articleList: { $set: nextArticleList },
+      articleList: { $set: action.payload.articleList },
       pageNumber: { $set: action.payload.pageNumber },
       total: { $set: action.payload.total },
     });
