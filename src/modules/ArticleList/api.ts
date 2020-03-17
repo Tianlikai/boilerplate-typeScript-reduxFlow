@@ -4,7 +4,7 @@ import { ArticleListResponse, PostArticleListRequest } from "./interface";
 
 const postArticleList = (data: PostArticleListRequest) => {
   const config: AxiosRequestConfig = { data };
-  return Service.post<ArticleListResponse>("/api/list/articleList", config);
+  return Service.post<ArticleListResponse>("/api/article/list", config);
 };
 
 export default {

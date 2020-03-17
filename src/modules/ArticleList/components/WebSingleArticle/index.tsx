@@ -15,8 +15,8 @@ export const WebSingleArticle: React.FC<WebSingleArticleProps> = ({
   articles,
 }) => (
   <>
-    {map(articles, article => (
-      <div key={article.id} className={`${PREFIX}Wrapper`}>
+    {map(articles, (article, i) => (
+      <div key={i} className={`${PREFIX}Wrapper`}>
         <div className={PREFIX}>
           <Link to="#">
             <div className={`${PREFIX}-img`}>

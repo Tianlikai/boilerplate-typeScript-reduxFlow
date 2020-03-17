@@ -23,7 +23,6 @@ export interface PostArticleListRequest {
 
 export interface ArticleListResponse extends Response {
   data: {
-    total: number;
     articleList: Article[];
   };
 }

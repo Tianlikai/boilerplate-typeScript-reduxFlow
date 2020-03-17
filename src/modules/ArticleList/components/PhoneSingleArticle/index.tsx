@@ -15,7 +15,7 @@ export const PhoneSingleArticle: React.FC<PhoneSingleArticleProps> = ({
 }) => (
   <>
     {map(articles, article => (
-      <div key={article.id} className={`${PREFIX}`}>
+      <div className={`${PREFIX}`}>
         <Link to="#" className={`${PREFIX}-img`}>
           <img src={article.imgUrl} />
         </Link>

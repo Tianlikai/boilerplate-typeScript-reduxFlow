@@ -1,32 +1,89 @@
 import React from "react";
-import { Article } from "../interface";
 import { PhoneSingleArticle } from "../components/PhoneSingleArticle";
 import { WebSingleArticle } from "../components/WebSingleArticle";
 import "./index.scss";
-
-const ARTICLE = {
-  imgUrl:
-    "https://img.huxiucdn.com/article/cover/202003/16/200539438309.jpg?imageView2/1/w/522/h/295/|imageMogr2/strip/interlace/1/quality/85/format/jpg",
-  title: "《王国》：他来了，他和丧尸一起来了",
-  author: "长江公寓",
-  publishTime: Date.now(),
-  reviews: 1,
-  likes: 1,
-};
-const DATA: Article[] = [];
-for (let i = 0; i < 20; i += 1) {
-  DATA.push({ ...ARTICLE, id: i });
-}
+import { rootSelector } from "../selector";
+import { Dispatch, bindActionCreators } from "redux";
+import { createSelector } from "reselect";
+import { connect } from "react-redux";
+import { updateViewPortInfo, fetchArticleListActions } from "../action";
 
 const PREFIX = "ArticleList";
 
-export default class ArticleList extends React.PureComponent<{}> {
+const mapStateToProps = createSelector(rootSelector, state => ({
+  articleList: state.articleList,
+  loading: state.loading,
+  innerHeight: state.innerHeight,
+  lastScroll: state.lastScroll,
+  pageNumber: state.pageNumber,
+  pageSize: state.pageSize,
+  topViewPort: state.topViewPort,
+  bottomViewPort: state.bottomViewPort,
+}));
+
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      fetchArticleList: fetchArticleListActions.request,
+      updateViewPort: updateViewPortInfo,
+    },
+    dispatch,
+  );
+
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+class UnconnectedArticleList extends React.PureComponent<Props> {
+  private timer: number;
+
+  componentDidMount() {
+    const { pageNumber, pageSize, fetchArticleList } = this.props;
+    fetchArticleList({ pageNumber, pageSize });
+    this.timer = window.setTimeout(this.handleScroll, 100);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
+  handleScroll = (force: boolean) => {
+    clearTimeout(this.timer);
+    const { lastScroll } = this.props;
+    const { innerHeight, scrollY } = window;
+    // 如果时间间隔内，没有发生滚动，并且未强制触发，重启定时器并且返回
+    if (force || lastScroll < scrollY) {
+      const nextLastScroll = scrollY;
+      const topViewPort = scrollY - 1000;
+      const bottomViewPort = scrollY + innerHeight + 600;
+      this.props.updateViewPort({
+        lastScroll: nextLastScroll,
+        topViewPort,
+        bottomViewPort,
+      });
+      if (scrollY + innerHeight + 200 > document.body.scrollHeight) {
+        const { loading, pageNumber, pageSize, fetchArticleList } = this.props;
+        !loading && fetchArticleList({ pageNumber, pageSize });
+      }
+    }
+    this.timer = window.setTimeout(this.handleScroll, 100);
+  };
+
   render() {
+    const { articleList } = this.props;
     return (
-      <div className={PREFIX}>
-        <PhoneSingleArticle articles={DATA} />
-        <WebSingleArticle articles={DATA} />
-      </div>
+      <>
+        <div className={`${PREFIX} ${PREFIX}-web`}>
+          <WebSingleArticle articles={articleList} />
+        </div>
+        <div className={`${PREFIX} ${PREFIX}-phone`}>
+          <PhoneSingleArticle articles={articleList} />
+        </div>
+      </>
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UnconnectedArticleList);

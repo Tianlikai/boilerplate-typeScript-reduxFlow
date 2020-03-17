@@ -10,7 +10,19 @@
     content: "";
   }
 }
+@media (min-width: 769px) {
 
+  .ArticleList {
+
+    &-web {
+      display: block;
+    }
+
+    &-phone {
+      display: none;
+    }
+  }
+}
 @media (max-width: 769px) {
 
   .ArticleList {
@@ -18,13 +30,13 @@
     width: 100%;
     margin: 0;
     background-color: #fff;
-  }
 
-  .WebSingleArticleWrapper {
-    display: none;
-  }
+    &-web {
+      display: none;
+    }
 
-  .PhoneSingleArticle {
-    display: block;
+    &-phone {
+      display: block;
+    }
   }
 }
