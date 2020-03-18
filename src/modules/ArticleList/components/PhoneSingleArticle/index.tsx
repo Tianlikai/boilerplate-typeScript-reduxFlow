@@ -1,6 +1,7 @@
 import React from "react";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
+import LazyImage from "../../../../components/LazyImage";
 import { Article } from "../../interface";
 import { IMAGES_SOURCE_ADDRESS } from "../../constant";
 import "./index.scss";
@@ -18,7 +19,10 @@ export const PhoneSingleArticle: React.FC<PhoneSingleArticleProps> = ({
     {map(articles, article => (
       <div key={article.id} className={`${PREFIX}`}>
         <Link to="#" className={`${PREFIX}-img`}>
-          <img src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`} />
+          <LazyImage
+            src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`}
+            isVisible={true}
+          />
         </Link>
         <div className={`${PREFIX}-content`}>
           <Link to="#" className={`${PREFIX}-link`}>

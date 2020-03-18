@@ -39,18 +39,46 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-class UnconnectedArticleList extends React.PureComponent<Props> {
+enum MODE {
+  WEB = "web",
+  PHONE = "phone",
+}
+
+interface State {
+  mode: MODE;
+}
+
+class UnconnectedArticleList extends React.PureComponent<Props, State> {
   private timer: number;
+  private webRef = React.createRef<HTMLDivElement>();
+  private phoneRef = React.createRef<HTMLDivElement>();
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      mode: this.getMode(),
+    };
+  }
 
   componentDidMount() {
     const { pageNumber, pageSize, fetchArticleList } = this.props;
     fetchArticleList({ pageNumber, pageSize });
     this.timer = window.setTimeout(this.handleScroll, 100);
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
+    window.removeEventListener("resize", this.handleResize);
   }
+
+  getMode = () => (document.body.clientWidth > 769 ? MODE.WEB : MODE.PHONE);
+
+  handleResize = () => {
+    this.setState({
+      mode: this.getMode(),
+    });
+  };
 
   handleScroll = (force: boolean) => {
     clearTimeout(this.timer);
@@ -79,17 +107,21 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
 
   render() {
     const { articleList, loading, total } = this.props;
+    const { mode } = this.state;
     return (
       <>
         <Helmet>
           <title>列表</title>
         </Helmet>
-        <div className={`${PREFIX} ${PREFIX}-web`}>
-          <WebSingleArticle articles={articleList} />
-        </div>
-        <div className={`${PREFIX} ${PREFIX}-phone`}>
-          <PhoneSingleArticle articles={articleList} />
-        </div>
+        {mode === MODE.WEB ? (
+          <div ref={this.webRef} className={`${PREFIX} ${PREFIX}-web`}>
+            <WebSingleArticle articles={articleList} />
+          </div>
+        ) : (
+          <div ref={this.phoneRef} className={`${PREFIX} ${PREFIX}-phone`}>
+            <PhoneSingleArticle articles={articleList} />
+          </div>
+        )}
         {articleList.length !== 0 && loading && articleList.length < total && (
           <div className={`${PREFIX}-loading`}>正在努力加载中</div>
         )}

@@ -2,6 +2,7 @@ import React from "react";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { MessageOutlined, LikeOutlined } from "@ant-design/icons";
+import LazyImage from "../../../../components/LazyImage";
 import { Article } from "../../interface";
 import { IMAGES_SOURCE_ADDRESS } from "../../constant";
 import "./index.scss";
@@ -21,7 +22,10 @@ export const WebSingleArticle: React.FC<WebSingleArticleProps> = ({
         <div className={PREFIX}>
           <Link to="#">
             <div className={`${PREFIX}-img`}>
-              <img src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`} />
+              <LazyImage
+                src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`}
+                isVisible={true}
+              />
             </div>
             <div className={`${PREFIX}-content`}>
               <div className={`${PREFIX}-title`}>{article.title}</div>
