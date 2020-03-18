@@ -14,7 +14,8 @@
     content: "";
   }
 
-  &-end {
+  &-end,
+  &-loading {
     margin-bottom: 60px;
     text-align: center;
   }
@@ -47,6 +48,7 @@
     &-phone {
       display: block;
       margin-top: 8px;
+      margin-bottom: 30px;
     }
   }
 }

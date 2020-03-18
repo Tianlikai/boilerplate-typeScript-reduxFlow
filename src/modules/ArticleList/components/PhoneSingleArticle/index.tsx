@@ -25,7 +25,9 @@ export const PhoneSingleArticle: React.FC<PhoneSingleArticleProps> = ({
             <div className={`${PREFIX}-title`}>{article.title}</div>
           </Link>
           <div className={`${PREFIX}-status`}>
-            <div className={`${PREFIX}-statusAuthor`}>{article.author}</div>
+            <div className={`${PREFIX}-statusAuthor`} title={article.author}>
+              {article.author}
+            </div>
             <div className={`${PREFIX}-statusPublishTime`}>
               {`${article.publishTime}`.slice(0, 6)}
             </div>

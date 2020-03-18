@@ -18,12 +18,14 @@ function* fetchArticleListWorker(
         articleListSelector,
       );
       const { articleList: newArticleList, total } = res.data;
+      const index =
+        articleList.length > 0 ? articleList[articleList.length - 1].id + 1 : 0;
       const nextArticleList = [
         ...articleList,
         ...map(newArticleList, article => {
           return {
             ...article,
-            id: parseInt(`${pageNumber - 1}${article.id}`),
+            id: index + article.id,
           };
         }),
       ];

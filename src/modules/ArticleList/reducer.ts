@@ -21,7 +21,7 @@ const initState: State = {
   innerHeight: 0,
   lastScroll: 0,
   pageNumber: 1,
-  pageSize: 10,
+  pageSize: 20,
   total: 0,
   topViewPort: 0,
   bottomViewPort: 0,

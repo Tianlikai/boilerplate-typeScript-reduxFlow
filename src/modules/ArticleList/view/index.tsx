@@ -78,7 +78,7 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
   };
 
   render() {
-    const { articleList, total } = this.props;
+    const { articleList, loading, total } = this.props;
     return (
       <>
         <Helmet>
@@ -90,8 +90,11 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
         <div className={`${PREFIX} ${PREFIX}-phone`}>
           <PhoneSingleArticle articles={articleList} />
         </div>
+        {articleList.length !== 0 && loading && articleList.length < total && (
+          <div className={`${PREFIX}-loading`}>正在努力加载中</div>
+        )}
         {articleList.length !== 0 && articleList.length >= total && (
-          <div className={`${PREFIX}-end`}>没有更多内容了!!!</div>
+          <div className={`${PREFIX}-end`}>没有更多内容了</div>
         )}
       </>
     );
