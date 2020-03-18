@@ -26,3 +26,21 @@ export interface ArticleListResponse extends Response {
     articleList: Article[];
   };
 }
+
+/**
+ * 缓存每一个卡片的位置信息
+ */
+export interface ArticleItemLayout {
+  /**
+   * 底部offsetTop
+   */
+  bottom: number;
+  /**
+   * 卡片高度
+   */
+  height: number;
+  /**
+   * 顶部offsetTop
+   */
+  top: number;
+}

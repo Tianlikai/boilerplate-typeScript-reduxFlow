@@ -4,7 +4,7 @@ import {
   AsyncGroupCreator,
 } from "../../../packages/flux-payload-action";
 
-const NAMESPACE = "I18nProvider";
+const NAMESPACE = "Common/I18nProvider";
 
 export const initI18nAction = ActionCreator<void>(`${NAMESPACE}/initI18n`);
 

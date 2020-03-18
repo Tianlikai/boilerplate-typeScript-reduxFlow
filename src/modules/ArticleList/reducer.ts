@@ -1,7 +1,8 @@
 import { AnyAction } from "redux";
 import update from "immutability-helper";
 import { updateViewPortInfo, fetchArticleListActions } from "./action";
-import { Article } from "./interface";
+import { Article, ArticleItemLayout } from "./interface";
+import { getBufferViewPort } from "./utils";
 
 interface State {
   articleList: Article[];
@@ -13,6 +14,9 @@ interface State {
   total: number;
   topViewPort: number;
   bottomViewPort: number;
+  articleItemLayoutCache: {
+    [articleId: number]: ArticleItemLayout;
+  };
 }
 
 const initState: State = {
@@ -23,8 +27,9 @@ const initState: State = {
   pageNumber: 1,
   pageSize: 20,
   total: 0,
-  topViewPort: 0,
-  bottomViewPort: 0,
+  topViewPort: getBufferViewPort().topViewPort,
+  bottomViewPort: getBufferViewPort().bottomViewPort,
+  articleItemLayoutCache: {},
 };
 
 export const articleListReducer = (
@@ -45,6 +50,7 @@ export const articleListReducer = (
       articleList: { $set: action.payload.articleList },
       pageNumber: { $set: action.payload.pageNumber },
       total: { $set: action.payload.total },
+      articleItemLayoutCache: { $set: action.payload.visibleImagesMap },
     });
   }
   if (fetchArticleListActions.failure.match(action)) {

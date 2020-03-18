@@ -2,7 +2,11 @@ import {
   ActionCreator,
   AsyncGroupCreator,
 } from "../../packages/flux-payload-action";
-import { PostArticleListRequest, ArticleListResponse } from "./interface";
+import {
+  PostArticleListRequest,
+  ArticleListResponse,
+  ArticleItemLayout,
+} from "./interface";
 
 const NAMESPACE = "ArticleList";
 
@@ -14,6 +18,12 @@ export const updateViewPortInfo = ActionCreator<{
 
 export const fetchArticleListActions = AsyncGroupCreator<
   PostArticleListRequest,
-  ArticleListResponse["data"] & { pageNumber: number; pageSize: number },
+  ArticleListResponse["data"] & {
+    pageNumber: number;
+    pageSize: number;
+    visibleImagesMap: {
+      [articleId: number]: ArticleItemLayout;
+    };
+  },
   void
 >(`${NAMESPACE}/fetchArticleList`);

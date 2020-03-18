@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 import { i18nProviderReducer } from "./reducer";
 import { rootSelectorFactory } from "../../../packages/bootstrap/rootSelectorFactory";
 
-const NAMESPACE = "I18nProvider";
+const NAMESPACE = "Common/I18nProvider";
 
 export const rootSelector = rootSelectorFactory<typeof i18nProviderReducer>(
   NAMESPACE,

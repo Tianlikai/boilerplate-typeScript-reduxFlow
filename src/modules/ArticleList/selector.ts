@@ -12,3 +12,8 @@ export const articleListSelector = createSelector(
   rootSelector,
   state => state.articleList,
 );
+
+export const articleItemLayoutCacheSelector = createSelector(
+  rootSelector,
+  state => state.articleItemLayoutCache,
+);

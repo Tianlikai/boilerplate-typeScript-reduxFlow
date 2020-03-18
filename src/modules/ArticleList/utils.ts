@@ -1,0 +1,20 @@
+import { BUFFER_BOTTOM, BUFFER_TOP } from "./constant";
+
+/**
+ * 图片是否在加载区域
+ * @param offsetTop 图片顶部距离网站顶部距离
+ * @param bottomViewPort 加载区域底部位置
+ */
+export const isVisible = (offsetTop: number, bottomViewPort: number) =>
+  offsetTop <= bottomViewPort;
+
+/**
+ * 获取缓冲视区范围
+ */
+export const getBufferViewPort = () => {
+  const { innerHeight, scrollY } = window;
+  return {
+    topViewPort: scrollY - BUFFER_TOP,
+    bottomViewPort: scrollY + innerHeight + BUFFER_BOTTOM,
+  };
+};
