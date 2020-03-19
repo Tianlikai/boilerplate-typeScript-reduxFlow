@@ -5,6 +5,7 @@ import { createSelector } from "reselect";
 import { connect } from "react-redux";
 import { PhoneSingleArticle } from "../components/PhoneSingleArticle";
 import { WebSingleArticle } from "../components/WebSingleArticle";
+import { MyWebLoader, MyPhoneLoader } from "../components/CustomLoader";
 import {
   rootSelector,
   articleListSelector,
@@ -120,6 +121,7 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
         </Helmet>
         {isPc ? (
           <div ref={this.webRef} className={`${PREFIX} ${PREFIX}-web`}>
+            {loading && articleList.length === 0 && <MyWebLoader />}
             <WebSingleArticle
               articles={articleList}
               articleItemLayoutCache={articleItemLayoutCache}
@@ -128,6 +130,7 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
           </div>
         ) : (
           <div ref={this.phoneRef} className={`${PREFIX} ${PREFIX}-phone`}>
+            {loading && articleList.length === 0 && <MyPhoneLoader />}
             <PhoneSingleArticle
               articles={articleList}
               articleItemLayoutCache={articleItemLayoutCache}
