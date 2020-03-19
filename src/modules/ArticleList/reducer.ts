@@ -2,34 +2,34 @@ import { AnyAction } from "redux";
 import update from "immutability-helper";
 import { updateViewPortInfo, fetchArticleListActions } from "./action";
 import { Article, ArticleItemLayout } from "./interface";
-import { getBufferViewPort } from "./utils";
+import { BUFFER_BOTTOM } from "./constant";
 
 interface State {
   articleList: Article[];
+  articleItemLayoutCache: {
+    [articleId: number]: ArticleItemLayout;
+  };
   loading: boolean;
-  innerHeight: number;
   lastScroll: number;
+  pageHeight: number;
   pageNumber: number;
   pageSize: number;
   total: number;
   topViewPort: number;
   bottomViewPort: number;
-  articleItemLayoutCache: {
-    [articleId: number]: ArticleItemLayout;
-  };
 }
 
 const initState: State = {
   articleList: [],
+  articleItemLayoutCache: {},
   loading: false,
-  innerHeight: 0,
   lastScroll: 0,
+  pageHeight: 0,
   pageNumber: 1,
   pageSize: 20,
   total: 0,
-  topViewPort: getBufferViewPort().topViewPort,
-  bottomViewPort: getBufferViewPort().bottomViewPort,
-  articleItemLayoutCache: {},
+  topViewPort: 0,
+  bottomViewPort: window.innerHeight + BUFFER_BOTTOM,
 };
 
 export const articleListReducer = (
@@ -48,6 +48,7 @@ export const articleListReducer = (
     return update(state, {
       loading: { $set: false },
       articleList: { $set: action.payload.articleList },
+      pageHeight: { $set: action.payload.pageHeight },
       pageNumber: { $set: action.payload.pageNumber },
       total: { $set: action.payload.total },
       articleItemLayoutCache: { $set: action.payload.visibleImagesMap },

@@ -1,6 +1,6 @@
 import update from "immutability-helper";
 import { AnyAction } from "redux";
-import { updateAuthenticated } from "./action";
+import { updateAuthenticatedAction } from "./action";
 
 const initState = {
   isAuthenticated: true,
@@ -12,7 +12,7 @@ export const authReducer = (
   state: AuthState = initState,
   action: AnyAction,
 ) => {
-  if (updateAuthenticated.match(action)) {
+  if (updateAuthenticatedAction.match(action)) {
     return update(state, {
       isAuthenticated: { $set: action.payload.isAuthenticated },
     });

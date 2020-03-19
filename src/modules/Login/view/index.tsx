@@ -9,7 +9,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import Particles from "react-particles-js";
 import EventListener from "react-event-listener";
 import { RouteComponentProps, withRouter } from "react-router";
-import { updateAuthenticated } from "../../Auth/action";
+import { updateAuthenticatedAction } from "../../Auth/action";
 import { isAuthenticatedSelector } from "../../Auth/selector";
 import {
   BaseForm,
@@ -29,7 +29,10 @@ const mapStateToProps = createSelector(
 );
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ updateAuthenticated }, dispatch);
+  bindActionCreators(
+    { updateAuthenticated: updateAuthenticatedAction },
+    dispatch,
+  );
 
 const PREFIX = "Login";
 const PREFIX_FORM = "LoginFormWrapper";

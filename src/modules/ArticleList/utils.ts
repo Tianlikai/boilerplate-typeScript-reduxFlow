@@ -6,15 +6,23 @@ import { BUFFER_BOTTOM, BUFFER_TOP } from "./constant";
  * @param bottomViewPort 加载区域底部位置
  */
 export const isVisible = (offsetTop: number, bottomViewPort: number) =>
-  offsetTop <= bottomViewPort;
+  offsetTop < bottomViewPort;
 
 /**
  * 获取缓冲视区范围
+ * @param innerHeight
+ * @param pageHeight
+ * @param scrollY
  */
-export const getBufferViewPort = () => {
-  const { innerHeight, scrollY } = window;
+export const getBufferViewPort = (
+  innerHeight: number,
+  pageHeight: number,
+  scrollY: number,
+) => {
+  const bottomViewPort = scrollY + innerHeight + BUFFER_BOTTOM;
+  console.log(`bottomViewPort: ${bottomViewPort}, pageHeight: ${pageHeight}`);
   return {
     topViewPort: scrollY - BUFFER_TOP,
-    bottomViewPort: scrollY + innerHeight + BUFFER_BOTTOM,
+    bottomViewPort: bottomViewPort > pageHeight ? pageHeight : bottomViewPort,
   };
 };

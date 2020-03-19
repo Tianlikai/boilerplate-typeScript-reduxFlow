@@ -72,12 +72,20 @@ function* fetchArticleListWorker(
         };
       });
 
+      /**
+       * 页面总高
+       * 不通过document获取
+       */
+      const pageHeight =
+        visibleImagesMap[nextArticleList[nextArticleList.length - 1].id].bottom;
+
       yield put(
         fetchArticleListActions.success({
           pageSize,
           total,
           visibleImagesMap,
           articleList: [...articleList, ...nextArticleList],
+          pageHeight,
           pageNumber: pageNumber + 1,
         }),
       );

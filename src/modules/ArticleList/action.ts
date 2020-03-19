@@ -19,6 +19,7 @@ export const updateViewPortInfo = ActionCreator<{
 export const fetchArticleListActions = AsyncGroupCreator<
   PostArticleListRequest,
   ArticleListResponse["data"] & {
+    pageHeight: number;
     pageNumber: number;
     pageSize: number;
     visibleImagesMap: {

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { createSelector } from "reselect";
 import { bindActionCreators, Dispatch } from "redux";
 import logoSrc from "../../../assets/images/logo.svg";
-import { updateAuthenticated } from "../../Auth/action";
+import { updateAuthenticatedAction } from "../../Auth/action";
 import { updateI18nActions } from "../I18n/action";
 import { localeSelector } from "../I18n/selector";
 import { ZH_CN, EN_US } from "../I18n/constant";
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       updateIn18: updateI18nActions.request,
-      updateAuthenticated,
+      updateAuthenticated: updateAuthenticatedAction,
     },
     dispatch,
   );

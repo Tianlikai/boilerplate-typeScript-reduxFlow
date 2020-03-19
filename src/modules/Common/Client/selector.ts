@@ -9,3 +9,8 @@ export const rootSelector = rootSelectorFactory<typeof clientReducer>(
 );
 
 export const isPcSelector = createSelector(rootSelector, state => state.isPc);
+
+export const innerHeightSelector = createSelector(
+  rootSelector,
+  state => state.innerHeight,
+);

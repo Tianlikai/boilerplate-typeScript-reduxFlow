@@ -1,4 +1,5 @@
 import React from "react";
+import { debounce } from "lodash";
 import { hot } from "react-hot-loader/root";
 import { createSelector } from "reselect";
 import { Provider, connect } from "react-redux";
@@ -20,11 +21,14 @@ import { AppHeaderLayout } from "./modules/Common/Header";
 import { NavRoutesProvider } from "./modules/Common/Header/NavRouterContext";
 import { isAuthenticatedSelector } from "./modules/Auth/selector";
 import { I18nProvider } from "./modules/Common/I18n/components/I18nProvider";
-import { updateAuthenticated } from "./modules/Auth/action";
+import { onResizeAction } from "./modules/Common/Client/action";
+import { updateAuthenticatedAction } from "./modules/Auth/action";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { navRoutes, LOGIN_URL } from "./config";
 
 import "./index.scss";
+
+const TIME_INTERVAL = 200;
 
 const mapStateToProps = createSelector(
   isAuthenticatedSelector,
@@ -32,13 +36,22 @@ const mapStateToProps = createSelector(
 );
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ updateAuthenticated }, dispatch);
+  bindActionCreators(
+    {
+      updateAuthenticated: updateAuthenticatedAction,
+      onResize: onResizeAction,
+    },
+    dispatch,
+  );
 
 type AppProps = RouteComponentProps &
   ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
 class App extends React.PureComponent<AppProps> {
+  onResize = () => this.props.onResize({ innerHeight: window.innerHeight });
+  efficientOnResize = debounce(this.onResize, TIME_INTERVAL);
+
   componentDidMount() {
     const {
       isAuthenticated,
@@ -51,6 +64,7 @@ class App extends React.PureComponent<AppProps> {
     } else if (!isAuthenticated && pathname !== LOGIN_URL) {
       this.redirect();
     }
+    window.addEventListener("resize", this.efficientOnResize);
   }
 
   componentDidUpdate(prevProps: AppProps) {
@@ -60,6 +74,10 @@ class App extends React.PureComponent<AppProps> {
     ) {
       this.redirect();
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.efficientOnResize);
   }
 
   redirect() {
