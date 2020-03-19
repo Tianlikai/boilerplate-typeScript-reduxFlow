@@ -1,4 +1,4 @@
-import { EChartOption } from "echarts";
+// import { EChartOption } from "echarts";
 import { AsyncGroupCreator } from "../../packages/flux-payload-action";
 
 const NAMESPACE = "Dashboard";
@@ -6,7 +6,7 @@ const NAMESPACE = "Dashboard";
 export const getChartData = AsyncGroupCreator<
   void,
   {
-    option: EChartOption;
+    option: any;
   },
   void
 >(`${NAMESPACE}/getChartData`);
