@@ -9,8 +9,15 @@ module.exports = {
   entry: {
     stable: [
       "axios",
+      "classnames",
+      "connected-react-router",
+      "immutability-helper",
+      "qs",
       "react",
+      "react-content-loader",
       "react-dom",
+      "react-event-listener",
+      "react-helmet",
       "react-redux",
       "react-router",
       "react-router-dom",
