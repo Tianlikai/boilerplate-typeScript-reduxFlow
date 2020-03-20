@@ -6,7 +6,6 @@ import update from "immutability-helper";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import Particles from "react-particles-js";
 import EventListener from "react-event-listener";
 import { RouteComponentProps, withRouter } from "react-router";
 import { updateAuthenticatedAction } from "../../Auth/action";
@@ -19,7 +18,7 @@ import {
 } from "../../../packages/type-safe-form";
 import { navRoutes } from "../../../config";
 import { UserLoginForm } from "./LoginForm";
-import { LoginFormType } from "./interface";
+import { LoginFormType } from "../interface";
 
 import "./index.scss";
 
@@ -161,7 +160,6 @@ class Login extends React.PureComponent<IProps, IState> {
         <Helmet>
           <title>登录</title>
         </Helmet>
-        <Particles className={`${PREFIX}-bc`} />
         <div className={PREFIX_FORM}>
           <div className={`${PREFIX_FORM}-title`}>welcome</div>
           <UserLoginForm

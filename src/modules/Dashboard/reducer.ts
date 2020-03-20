@@ -1,12 +1,11 @@
 import update from "immutability-helper";
 import { AnyAction } from "redux";
-// import { EChartOption } from "echarts";
+import { EChartOption } from "echarts";
 import { getChartData } from "./action";
 
 interface State {
   loading: boolean;
-  // option: EChartOption;
-  option: any;
+  option: EChartOption;
 }
 
 const initState: State = {

@@ -118,6 +118,11 @@ module.exports = {
           reuseExistingChunk: true,
           name: "common",
         },
+        eCharts: {
+          test: /[\\/]node_modules[\\/](echarts|zrender)[\\/]/,
+          chunks: "async",
+          name: "eEharts",
+        },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10,

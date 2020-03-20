@@ -5,7 +5,7 @@ import {
 import { simpleFormFactory } from "../../../../components/Form/FormFactory";
 import { InputFactory } from "../../../../components/Form/Fields/Input";
 import { CheckboxFactory } from "../../../../components/Form/Fields/Checkbox";
-import { LoginFormType } from "../interface";
+import { LoginFormType } from "../../interface";
 import "./index.scss";
 
 const FormRenderer = simpleFormFactory<LoginFormType>({
