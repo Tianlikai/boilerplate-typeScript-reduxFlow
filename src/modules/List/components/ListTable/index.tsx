@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { defineMessages, FormattedMessage } from "react-intl";
 import { Table, Button, Pagination, Divider } from "antd";
 import { ColumnProps } from "antd/lib/table";
-import _ from "lodash";
+import { map } from "lodash";
 import { Article, Attachment } from "../../interface";
 import { ArticleStatus, ArticleStatusName } from "../../constant";
 import "./index.scss";
@@ -81,7 +81,7 @@ const ListTable: React.FC<Props> = ({
       dataIndex: "attachments",
       title: "附件",
       render: (attachments: Attachment[]) =>
-        _.map(attachments, attachment => attachment.name),
+        map(attachments, attachment => attachment.name),
     },
     {
       align: "right",

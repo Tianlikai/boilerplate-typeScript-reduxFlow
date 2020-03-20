@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 /** TODO: 生产环境打包会丢失html tag & css selector样式 */
 // const PurgecssPlugin = require("purgecss-webpack-plugin");
 
@@ -118,6 +119,11 @@ module.exports = {
           reuseExistingChunk: true,
           name: "common",
         },
+        eCharts: {
+          test: /[\\/]node_modules[\\/](echarts|zrender)[\\/]/,
+          chunks: "async",
+          name: "eEharts",
+        },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
@@ -133,6 +139,7 @@ module.exports = {
       chunkFilename: "[id].[chunkhash:8].css",
     }),
     new AntdDayjsWebpackPlugin(),
+    new LodashModuleReplacementPlugin(),
     // new PurgecssPlugin({
     //   paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     // }),

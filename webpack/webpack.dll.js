@@ -1,11 +1,30 @@
 const path = require("path");
 const webpack = require("webpack");
 
+/**
+ * 每个dll包保持在244k以下
+ */
 module.exports = {
   mode: "production",
   entry: {
-    react: ["react", "react-dom", "react-router", "react-router-dom"],
-    eCharts: ["echarts"],
+    stable: [
+      "axios",
+      "classnames",
+      "connected-react-router",
+      "immutability-helper",
+      "qs",
+      "react",
+      "react-content-loader",
+      "react-dom",
+      "react-event-listener",
+      "react-helmet",
+      "react-redux",
+      "react-router",
+      "react-router-dom",
+      "redux",
+      "redux-saga",
+      "reselect",
+    ],
   },
   output: {
     path: path.resolve(__dirname, "../dll"),

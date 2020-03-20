@@ -1,6 +1,6 @@
 # boilerplate
 
-这是一个快速生成含有typescript语言环境，自定义redux和redux-saga数据流的React种子项目
+这是一个快速生成含有 typescript 语言环境，自定义 redux 和 redux-saga 数据流的 React 种子项目
 
 ## 拉取项目
 
@@ -10,3 +10,7 @@
     npm i yo generator-tboilterplate -g
     yo tboilterplate
 ```
+
+## TODO
+
+- remove qs.js

@@ -13,6 +13,7 @@ module.exports = function(api) {
     "@babel/preset-typescript",
   ];
   const plugins = [
+    ["lodash"],
     ["react-hot-loader/babel"],
     ["@babel/plugin-proposal-class-properties", { loose: true }],
     ["@babel/plugin-syntax-dynamic-import"],

@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+import { map } from "lodash";
 import classnames from "classnames";
 import { GenericListProps } from "./interface";
 
@@ -9,7 +9,7 @@ export default class GenericList<T> extends React.PureComponent<
   render() {
     const { className, items, itemRender } = this.props;
     return (
-      <div className={classnames(className)}>{_.map(items, itemRender)}</div>
+      <div className={classnames(className)}>{map(items, itemRender)}</div>
     );
   }
 }
