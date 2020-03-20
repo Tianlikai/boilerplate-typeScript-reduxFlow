@@ -11,6 +11,16 @@
     yo tboilterplate
 ```
 
+## 架构图
+
+## 项目规范
+
 ## TODO
 
-- remove qs.js
+1. 体积优化类
+
+- remove qs.js(本地重写)
+- remove react-helmet(本地重写)
+- ant design 按需加载的样式太大，是的能缩小
+- ant design 按需加载的组件太大，是否可以优化，或者直接 lazyLoad
+- @ant-design/icons 按需加载还是太大，是否有替换方案，替换后引用 ant design 的组件是否可以正常使用
