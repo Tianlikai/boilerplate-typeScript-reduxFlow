@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import _ from "lodash";
+import { map } from "lodash";
 import React from "react";
 import { Button } from "antd";
 import { connect } from "react-redux";
@@ -64,7 +64,7 @@ class AppHeader extends React.PureComponent<Props> {
                     </div>
                   </div>
                   <div className="NavMenu">
-                    {_.map(navRoutes, nav => (
+                    {map(navRoutes, nav => (
                       <Link
                         className={classnames("NavLink", {
                           "is-active": matchPath(url, { path: nav.url }),

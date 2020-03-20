@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import _ from "lodash";
+import { split } from "lodash";
 import React from "react";
 import { Helmet } from "react-helmet";
 import update from "immutability-helper";
@@ -98,7 +98,7 @@ class Login extends React.PureComponent<IProps, IState> {
       location: { search },
       history,
     } = this.props;
-    const from = _.split(search, "?")[1] || navRoutes[0].url;
+    const from = split(search, "?")[1] || navRoutes[0].url;
     history.replace(from);
   }
 
