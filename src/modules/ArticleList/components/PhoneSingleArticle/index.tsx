@@ -23,7 +23,7 @@ export const PhoneSingleArticle: React.FC<PhoneSingleArticleProps> = ({
   <>
     {map(articles, article => (
       <div key={article.id} className={`${PREFIX}`}>
-        <Link to="#" className={`${PREFIX}-img`}>
+        <Link to={`article/${article.id}`} className={`${PREFIX}-img`}>
           <LazyImage
             src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`}
             isVisible={isVisible(
@@ -33,7 +33,7 @@ export const PhoneSingleArticle: React.FC<PhoneSingleArticleProps> = ({
           />
         </Link>
         <div className={`${PREFIX}-content`}>
-          <Link to="#" className={`${PREFIX}-link`}>
+          <Link to={`article/${article.id}`} className={`${PREFIX}-link`}>
             <div className={`${PREFIX}-title`}>{article.title}</div>
           </Link>
           <div className={`${PREFIX}-status`}>

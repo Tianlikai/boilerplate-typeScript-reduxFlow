@@ -24,6 +24,7 @@ export const routeAuthMapSelector = createSelector(
       "/dashboard": true,
       "/list": true,
       "/articleList": true,
+      "/article/:id": true,
     };
     return routeAuthMap;
   },

@@ -10,7 +10,8 @@
     "analyzer": "cross-env NODE_ENV=analyzer webpack --config webpack/index.js",
     "commit": "git-cz",
     "standard-version": "standard-version",
-    "manage:translations": "node ./translations/index.js"
+    "manage:translations": "node ./translations/index.js",
+    "styleLint:fix": "stylelint 'src/**/*.scss' --fix"
   },
   "sideEffects": [
     "*.css",

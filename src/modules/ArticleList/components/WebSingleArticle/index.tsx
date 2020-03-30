@@ -25,7 +25,7 @@ export const WebSingleArticle: React.FC<WebSingleArticleProps> = ({
     {map(articles, article => (
       <div key={article.id} className={`${PREFIX}Wrapper`}>
         <div className={PREFIX}>
-          <Link to="#">
+          <Link to={`article/${article.id}`}>
             <div className={`${PREFIX}-img`}>
               <LazyImage
                 src={`${IMAGES_SOURCE_ADDRESS}${article.id}.jpg`}
@@ -55,7 +55,10 @@ export const WebSingleArticle: React.FC<WebSingleArticleProps> = ({
             </div>
           </Link>
           <div className={`${PREFIX}-author`}>
-            <Link to="#" className={`${PREFIX}-authorLink`}>
+            <Link
+              to={`article/${article.id}`}
+              className={`${PREFIX}-authorLink`}
+            >
               {article.author}
             </Link>
           </div>

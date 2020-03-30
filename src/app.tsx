@@ -17,6 +17,7 @@ import { Login } from "./modules/Login";
 import { Dashboard } from "./modules/Dashboard";
 import { List } from "./modules/List";
 import { ArticleList } from "./modules/ArticleList";
+import { Article } from "./modules/Article";
 import { AppHeaderLayout } from "./modules/Common/Header";
 import { NavRoutesProvider } from "./modules/Common/Header/NavRouterContext";
 import { isAuthenticatedSelector } from "./modules/Auth/selector";
@@ -109,6 +110,11 @@ class App extends React.PureComponent<AppProps> {
           <RouteWithLayout
             path={`${path}articleList`}
             component={ArticleList}
+            layout={AppHeaderLayout}
+          />
+          <RouteWithLayout
+            path={`${path}article/:id`}
+            component={Article}
             layout={AppHeaderLayout}
           />
           <Redirect to={`${path}articleList`} />
