@@ -11,11 +11,17 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: path.join(__dirname, "../src"),
-        use: ["style-loader", "css-loader"],
+        use: ["thread-loader", "style-loader", "css-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
+        use: [
+          "thread-loader",
+          "style-loader",
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
       },
     ],
   },
