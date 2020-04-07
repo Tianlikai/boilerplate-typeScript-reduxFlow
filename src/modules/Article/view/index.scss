@@ -1,48 +1,29 @@
-.ARTICLE {
-  width: 1036px;
+.Article {
+  width: 700px;
   margin: 30px auto 30px;
-  padding: 0 30px 30px 30px;
+  padding: 30px;
   overflow: hidden;
+  text-align: justify;
   background-color: #fff;
   border-radius: 2px;
 
   &-title {
-    margin-bottom: 50px;
+    margin: 16px 0 50px 0;
+    color: #333;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 24px;
   }
 
-  &-auth {
-    display: flex;
-    padding: 24px 0;
+  &-img {
+    width: 640px;
+    height: 361px;
+    margin-bottom: 24px;
 
-    &Avator {
-      width: 40px;
-      height: 40px;
-      margin-right: 12px;
-      background-color: lightgray;
-      border-radius: 50%;
-    }
-
-    &Name {
-      display: inline-block;
-      max-width: 100%;
-      color: #333;
-      font-weight: 700;
-      font-size: 15px;
-    }
-  }
-
-  &-article {
-
-    &Time {
-      margin-right: 5px;
-    }
-
-    &Time,
-    &Count {
-      color: #909090;
-      font-size: 13px;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      vertical-align: top;
     }
   }
 
@@ -50,131 +31,18 @@
     color: #000;
     font-weight: 500;
   }
-
-  img {
-    max-width: 100%;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  table,
-  th,
-  td {
-    padding: 5px;
-    border: 1px solid #eaeaea;
-    border-radius: 3px;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f8f8f8;
-  }
-
-  body {
-    max-width: 42em;
-    margin: auto;
-    padding: 1em;
-    font-family: Helvetica, Arial, Freesans, clean, sans-serif;
-    background: #fefefe;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: bold;
-  }
-
-  h1 {
-    color: #000;
-    font-size: 28px;
-  }
-
-  h2 {
-    color: #000;
-    font-size: 24px;
-    border-bottom: 1px solid #ccc;
-  }
-
-  h3 {
-    font-size: 18px;
-  }
-
-  h4 {
-    font-size: 16px;
-  }
-
-  h5 {
-    font-size: 14px;
-  }
-
-  h6 {
-    color: #777;
-    font-size: 14px;
-    background-color: inherit;
-  }
-
-  hr {
-    height: 0.2em;
-    color: #ccc;
-    background-color: #ccc;
-    border: 0;
-  }
-
-  p,
-  blockquote,
-  ul,
-  ol,
-  dl,
-  li,
-  table,
-  pre {
-    margin: 15px 0;
-  }
-
-  code,
-  pre {
-    color: inherit;
-    background-color: #f8f8f8;
-    border-radius: 3px;
-  }
-
-  code {
-    margin: 0 2px;
-    padding: 0 5px;
-    border: 1px solid #eaeaea;
-  }
-
-  pre {
-    padding: 6px 10px;
-    overflow: auto;
-    line-height: 1.25em;
-    border: 1px solid #ccc;
-  }
-
-  pre > code {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  a,
-  a:visited {
-    color: #4183c4;
-    text-decoration: none;
-    background-color: inherit;
-  }
 }
 
 @media (max-width: 769px) {
 
-  .ARTICLE {
+  .Article {
     width: 100%;
-    padding: 0 10px 30px 10px;
+    padding: 24px;
     background-color: #fff;
+
+    &-img {
+      width: 327px;
+      height: 185px;
+    }
   }
 }

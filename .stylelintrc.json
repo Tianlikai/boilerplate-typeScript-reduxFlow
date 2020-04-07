@@ -18,5 +18,6 @@
     "no-missing-end-of-source-newline": null,
     "font-family-no-missing-generic-family-keyword": null,
     "rule-empty-line-before": "always-multi-line"
-  }
+  },
+  "ignoreFiles": ["./src/modules/Article/view/markdown.scss"]
 }

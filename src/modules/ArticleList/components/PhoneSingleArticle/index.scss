@@ -43,12 +43,9 @@
     overflow: hidden;
     color: #909090;
 
-    &Author,
-    &PublishTime {
-      float: left;
-    }
-
     &Author {
+      float: left;
+
       width: 56px;
       margin-right: 5px;
       overflow: hidden;

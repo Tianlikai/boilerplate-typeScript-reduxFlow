@@ -24,7 +24,7 @@ function* fetchArticleListWorker(
       Api.postArticleList,
       action.payload,
     );
-    if (res.errorCode === 0) {
+    if (res.errCode === 0) {
       const { pageNumber, pageSize } = action.payload;
       const { articleList: newArticleList, total } = res.data;
 

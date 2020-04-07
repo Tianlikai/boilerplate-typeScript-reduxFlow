@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { Article } from "./interface";
 import { articleListReducer } from "./reducer";
 import { rootSelectorFactory } from "../../packages/bootstrap/rootSelectorFactory";
 
@@ -17,3 +18,9 @@ export const articleItemLayoutCacheSelector = createSelector(
   rootSelector,
   state => state.articleItemLayoutCache,
 );
+
+export const articleMapSelector = createSelector(rootSelector, state => {
+  const map: { [id: number]: Article } = {};
+  state.articleList.forEach(article => (map[article.id] = article));
+  return map;
+});
