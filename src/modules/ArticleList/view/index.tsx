@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Dispatch, bindActionCreators } from "redux";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
@@ -62,6 +61,7 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
   private phoneRef = React.createRef<HTMLDivElement>();
 
   componentDidMount() {
+    document.title = "列表";
     const { pageNumber, pageSize, fetchArticleList } = this.props;
     fetchArticleList({ pageNumber, pageSize });
     this.timer = window.setTimeout(this.handleScroll, TIME_INTERVAL);
@@ -116,9 +116,6 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
     } = this.props;
     return (
       <>
-        <Helmet>
-          <title>列表</title>
-        </Helmet>
         {isPc ? (
           <div ref={this.webRef} className={`${PREFIX} ${PREFIX}-web`}>
             {loading && articleList.length === 0 && <MyWebLoader />}

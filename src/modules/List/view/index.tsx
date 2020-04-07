@@ -1,6 +1,5 @@
 import React from "react";
 import { FormattedMessage, defineMessages } from "react-intl";
-import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import { Dispatch, bindActionCreators } from "redux";
@@ -38,6 +37,7 @@ type Props = ReturnType<typeof mapStateToProps> &
 
 class List extends React.PureComponent<Props> {
   componentDidMount() {
+    document.title = "表格";
     const { pageNumber, pageSize } = this.props;
     this.props.searchArticleList({ pageNumber, pageSize });
   }
@@ -50,9 +50,6 @@ class List extends React.PureComponent<Props> {
     const { articleList, loading, pageNumber, pageSize, total } = this.props;
     return (
       <div className={PREFIX}>
-        <Helmet>
-          <title>表格</title>
-        </Helmet>
         <CustomButton className={`${PREFIX}-create`} type="primary">
           <FormattedMessage {...MESSAGES.create} />
         </CustomButton>

@@ -1,7 +1,6 @@
 import React from "react";
 import memoizeOne from "memoize-one";
 import { connect } from "react-redux";
-import { Helmet } from "react-helmet";
 import { Dispatch, bindActionCreators } from "redux";
 import { RouteComponentProps } from "react-router";
 import { IMAGES_SOURCE_ADDRESS } from "../../../modules/ArticleList/constant";
@@ -52,6 +51,15 @@ class UnconnectedArticle extends React.PureComponent<
     this.props.getArticle({ id: this.state.id });
   }
 
+  componentDidUpdate(preProps: ArticleProps, preState: ArticleState) {
+    const oldTitle = this.getArticle(preState.id, preProps.articleMap).title;
+    const newTitle = this.getArticle(this.state.id, this.props.articleMap)
+      .title;
+    if (oldTitle !== newTitle) {
+      document.title = `${newTitle}`;
+    }
+  }
+
   getArticle = memoizeOne((id: string, map: ArticleMap) => map[id] || {});
 
   render() {
@@ -60,9 +68,6 @@ class UnconnectedArticle extends React.PureComponent<
     const article = this.getArticle(id, articleMap);
     return (
       <div className={PREFIX}>
-        <Helmet>
-          <title>{article.title ? article.title : ""}</title>
-        </Helmet>
         {errorInfo ? (
           errorInfo.message
         ) : (

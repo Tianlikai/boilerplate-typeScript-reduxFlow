@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import { split } from "lodash";
 import React from "react";
-import { Helmet } from "react-helmet";
 import update from "immutability-helper";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
@@ -69,6 +68,7 @@ class Login extends React.PureComponent<IProps, IState> {
   superForm: BaseForm = createSuperForm();
 
   componentDidMount() {
+    document.title = "登录";
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
       this.redirect();
@@ -157,9 +157,6 @@ class Login extends React.PureComponent<IProps, IState> {
 
     return (
       <div className={PREFIX}>
-        <Helmet>
-          <title>登录</title>
-        </Helmet>
         <div className={PREFIX_FORM}>
           <div className={`${PREFIX_FORM}-title`}>welcome</div>
           <UserLoginForm

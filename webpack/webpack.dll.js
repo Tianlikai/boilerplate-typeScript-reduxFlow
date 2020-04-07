@@ -17,7 +17,6 @@ module.exports = {
       "react-content-loader",
       "react-dom",
       "react-event-listener",
-      "react-helmet",
       "react-redux",
       "react-router",
       "react-router-dom",
