@@ -48,15 +48,6 @@ class UnconnectedArticle extends React.PureComponent<
     this.state = { id: props.match.params.id };
   }
 
-  static getDerivedStateFromProps(props: ArticleProps, state: ArticleState) {
-    if (props.match.params.id !== state.id) {
-      return {
-        id: props.match.params.id,
-      };
-    }
-    return null;
-  }
-
   componentDidMount() {
     this.props.getArticle({ id: this.state.id });
   }

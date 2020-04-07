@@ -25,6 +25,7 @@ export const ArticleReducer = (state = initState, action: AnyAction): State => {
   if (getArticleActions.success.match(action)) {
     return update(state, {
       loading: { $set: false },
+      errorInfo: { $set: undefined },
       articleMap: {
         [action.payload.id]: { $set: action.payload },
       },

@@ -20,7 +20,6 @@ export const getBufferViewPort = (
   scrollY: number,
 ) => {
   const bottomViewPort = scrollY + innerHeight + BUFFER_BOTTOM;
-  console.log(`bottomViewPort: ${bottomViewPort}, pageHeight: ${pageHeight}`);
   return {
     topViewPort: scrollY - BUFFER_TOP,
     bottomViewPort: bottomViewPort > pageHeight ? pageHeight : bottomViewPort,
