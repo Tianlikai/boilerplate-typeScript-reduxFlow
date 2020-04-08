@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { DashboardOutlined } from "@ant-design/icons";
 import { Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -18,15 +17,13 @@ type Props = ReturnType<typeof mapDispatchToProps>;
 
 class UnConnectDashboard extends React.PureComponent<Props> {
   componentDidMount() {
+    document.title = "仪表盘";
     this.props.getChartData();
   }
 
   render() {
     return (
       <div className={PREFIX}>
-        <Helmet>
-          <title>仪表盘</title>
-        </Helmet>
         <div className={`${PREFIX}-header`}>
           <DashboardOutlined className={`${PREFIX}-headerIcon`} />
           <span className={`${PREFIX}-headerText`}>仪表盘</span>

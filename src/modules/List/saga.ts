@@ -10,7 +10,7 @@ function* searchArticleListWorker(
       Api.postArticleList,
       action.payload,
     );
-    if (res.errorCode === 0) {
+    if (res.errCode === 0) {
       const { data } = res;
       yield put(
         searchArticleListActions.success({ ...data, ...action.payload }),

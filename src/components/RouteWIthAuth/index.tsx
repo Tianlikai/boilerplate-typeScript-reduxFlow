@@ -13,8 +13,8 @@ const mapStateToProps = createSelector(
   isAuthenticatedSelector,
   routeAuthMapSelector,
   (isAuthenticated, routeAuthMap) => ({
-    isAuthenticated: isAuthenticated,
-    routeAuthMap: routeAuthMap,
+    isAuthenticated,
+    routeAuthMap,
   }),
 );
 

@@ -15,11 +15,11 @@ function* updateLocalesWorker(
 ) {
   try {
     const { locale } = action.payload;
-    const { errorCode, data }: SR<typeof Api.fetchLocalesApi> = yield call(
+    const { errCode, data }: SR<typeof Api.fetchLocalesApi> = yield call(
       Api.fetchLocalesApi,
       locale,
     );
-    if (errorCode === 0) {
+    if (errCode === 0) {
       yield put(updateI18nActions.success({ locale, messages: data }));
     }
   } catch (error) {
