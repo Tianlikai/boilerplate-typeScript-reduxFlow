@@ -9,7 +9,7 @@ import HeadInfo from "./HeadInfo";
 import { ARTICLE_MAP } from "../files";
 import { createSelector } from "reselect";
 import { rootSelector } from "../selector";
-import { getArticleActions } from "../action";
+import { getArticleActions, resetErrorInfoAction } from "../action";
 import { RouterInfo, ArticleMap } from "../interface";
 import "./index.scss";
 import "./markdown.scss";
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       getArticle: getArticleActions.request,
+      resetErrorInfo: resetErrorInfoAction,
     },
     dispatch,
   );
@@ -58,6 +59,10 @@ class UnconnectedArticle extends React.PureComponent<
     if (oldTitle !== newTitle) {
       document.title = `${newTitle}`;
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetErrorInfo();
   }
 
   getArticle = memoizeOne((id: string, map: ArticleMap) => map[id] || {});

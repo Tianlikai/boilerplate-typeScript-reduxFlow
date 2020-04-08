@@ -1,4 +1,7 @@
-import { AsyncGroupCreator } from "../../packages/flux-payload-action";
+import {
+  AsyncGroupCreator,
+  ActionCreator,
+} from "../../packages/flux-payload-action";
 import { ArticleResponse } from "./interface";
 import { NetworkErrorMessage } from "../../interface";
 
@@ -9,3 +12,7 @@ export const getArticleActions = AsyncGroupCreator<
   ArticleResponse["data"],
   NetworkErrorMessage | void
 >(`${NAMESPACE}/getArticle`);
+
+export const resetErrorInfoAction = ActionCreator<void>(
+  `${NAMESPACE}/resetErrorInfo`,
+);

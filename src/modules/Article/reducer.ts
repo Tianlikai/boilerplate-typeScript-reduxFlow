@@ -1,7 +1,7 @@
 import update from "immutability-helper";
 import { AnyAction } from "redux";
 import { ArticleMap } from "./interface";
-import { getArticleActions } from "./action";
+import { getArticleActions, resetErrorInfoAction } from "./action";
 import { NetworkErrorMessage } from "../../interface";
 
 interface State {
@@ -35,6 +35,11 @@ export const ArticleReducer = (state = initState, action: AnyAction): State => {
     return update(state, {
       loading: { $set: false },
       errorInfo: { $set: action.payload },
+    });
+  }
+  if (resetErrorInfoAction.match(action)) {
+    return update(state, {
+      errorInfo: { $set: undefined },
     });
   }
   return state;
