@@ -1,6 +1,6 @@
 $prefixAppHeaderLayout: "AppHeaderLayout";
 $prefixAppHeader: "AppHeader";
-$appHeaderHeight: 60px;
+$appHeaderHeight: 70px;
 
 .#{$prefixAppHeaderLayout} {
   width: 100%;
@@ -52,8 +52,8 @@ $appHeaderHeight: 60px;
   margin-right: 40px;
 
   &-img {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
   }
 }
 
@@ -75,7 +75,7 @@ $appHeaderHeight: 60px;
 
     &-anchor {
       color: #71777c;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     &.is-active .NavLink-anchor,
