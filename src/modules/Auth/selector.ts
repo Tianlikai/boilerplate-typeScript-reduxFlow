@@ -23,6 +23,7 @@ export const routeAuthMapSelector = createSelector(
     const routeAuthMap: Dictionary<boolean> = {
       "/dashboard": true,
       "/list": true,
+      "/vList": true,
       "/articleList": true,
       "/article/:id": true,
     };

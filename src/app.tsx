@@ -16,6 +16,7 @@ import { History } from "history";
 import { Login } from "./modules/Login";
 import { Dashboard } from "./modules/Dashboard";
 import { List } from "./modules/List";
+import { VList } from "./modules/VList";
 import { ArticleList } from "./modules/ArticleList";
 import { Article } from "./modules/Article";
 import { AppHeaderLayout } from "./modules/Common/Header";
@@ -26,6 +27,7 @@ import { onResizeAction } from "./modules/Common/Client/action";
 import { updateAuthenticatedAction } from "./modules/Auth/action";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { navRoutes, LOGIN_URL } from "./config";
+import { getFPS } from "./utils/frame";
 
 import "./index.scss";
 
@@ -54,6 +56,7 @@ class App extends React.PureComponent<AppProps> {
   efficientOnResize = debounce(this.onResize, TIME_INTERVAL);
 
   componentDidMount() {
+    getFPS();
     const {
       isAuthenticated,
       location: { pathname },
@@ -106,6 +109,11 @@ class App extends React.PureComponent<AppProps> {
             path={`${path}list`}
             component={List}
             layout={AppHeaderLayout}
+          />
+          <Route
+            path={`${path}vList`}
+            component={VList}
+            // layout={AppHeaderLayout}
           />
           <RouteWithLayout
             path={`${path}articleList`}

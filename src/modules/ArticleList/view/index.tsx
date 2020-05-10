@@ -20,6 +20,7 @@ import { getBufferViewPort } from "../utils";
 
 const PREFIX = "ArticleList";
 const TIME_INTERVAL = 100;
+const BUFFER_TO_BOTTOM = 300;
 
 const mapStateToProps = createSelector(
   rootSelector,
@@ -95,7 +96,7 @@ class UnconnectedArticleList extends React.PureComponent<Props> {
         bottomViewPort,
       });
       if (
-        scrollY + innerHeight + 200 > pageHeight &&
+        scrollY + innerHeight + BUFFER_TO_BOTTOM > pageHeight &&
         total > articleList.length
       ) {
         const { loading, pageNumber, pageSize, fetchArticleList } = this.props;

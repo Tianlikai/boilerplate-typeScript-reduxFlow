@@ -1,0 +1,31 @@
+.VList {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+
+  &-header {
+    height: 100px;
+    background-color: skyblue;
+  }
+
+  &-nav {
+    position: sticky;
+    top: 0;
+    height: 100px;
+    background-color: lightblue;
+  }
+
+  &-scroll {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+  &-vList {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+}
